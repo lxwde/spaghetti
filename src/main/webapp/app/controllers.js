@@ -26,5 +26,5 @@
     };
 
     AppController.$inject = ['$scope', 'Item'];
-    angular.module("spaghetti.controllers").controller("AppController", AppController);
+    angular.module("myApp.controllers").controller("AppController", AppController);
 }(angular));

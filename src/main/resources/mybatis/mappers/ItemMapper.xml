@@ -17,7 +17,7 @@
 
 <mapper namespace="com.lxwde.spaghetti.ItemMapper">
 
-    <select id="getUserById" resultType="com.lxwde.spaghetti.Item" parameterType="java.lang.Integer">
+    <select id="getItemById" resultType="com.lxwde.spaghetti.Item" parameterType="java.lang.Integer">
         select * from item where id = #{itemId}
     </select>
 

@@ -11,12 +11,19 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RestController
 @RequestMapping("/items")
 public class ItemController {
+
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     private ItemMapper itemMapper;
 
     @RequestMapping(method = GET)
-    public List<Item> findItems() {
+    public List<Item> getItems() {
         return itemMapper.getAllItems();
+    }
+
+    @RequestMapping(value = "/{id}", method = GET)
+    public Item getItem(@PathVariable Integer id) {
+        return itemMapper.getItemById(id);
     }
 
     @RequestMapping(method = POST)

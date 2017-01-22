@@ -13,5 +13,5 @@
     };
 
     ItemFactory.$inject = ['$resource'];
-    angular.module("spaghetti.services").factory("Item", itemFactory);
+    angular.module("myApp.services").factory("Item", ItemFactory);
 }(angular));
