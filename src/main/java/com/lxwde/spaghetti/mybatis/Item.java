@@ -1,4 +1,4 @@
-package com.lxwde.spaghetti;
+package com.lxwde.spaghetti.mybatis;
 
 
 public class Item {

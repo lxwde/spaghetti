@@ -15,21 +15,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lxwde.spaghetti.ItemMapper">
+<mapper namespace="com.lxwde.spaghetti.mybatis.ItemMapper">
 
-    <select id="getItemById" resultType="com.lxwde.spaghetti.Item" parameterType="java.lang.Integer">
+    <select id="getItemById" resultType="com.lxwde.spaghetti.mybatis.Item" parameterType="java.lang.Integer">
         select * from item where id = #{itemId}
     </select>
 
-    <select id="getAllItems" resultType="com.lxwde.spaghetti.Item">
+    <select id="getAllItems" resultType="com.lxwde.spaghetti.mybatis.Item">
         select * from item
     </select>
 
-    <insert id="insertItem" parameterType="com.lxwde.spaghetti.Item" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertItem" parameterType="com.lxwde.spaghetti.mybatis.Item" useGeneratedKeys="true" keyProperty="id">
         insert into item(checked, description) values(#{checked}, #{description})
     </insert>
 
-    <update id="updateItem" parameterType="com.lxwde.spaghetti.Item">
+    <update id="updateItem" parameterType="com.lxwde.spaghetti.mybatis.Item">
         update item set checked = #{checked}, description = #{description} where id = #{id}
     </update>
 

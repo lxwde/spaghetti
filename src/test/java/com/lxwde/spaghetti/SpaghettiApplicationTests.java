@@ -1,4 +1,4 @@
-package com.lxwde.spaghetti;
+package com.lxwde.spaghetti.mybatis;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
