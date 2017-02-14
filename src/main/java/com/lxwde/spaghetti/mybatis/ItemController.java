@@ -9,7 +9,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/api/items")
 public class ItemController {
 
     @Autowired
