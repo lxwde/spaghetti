@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container" ng-init="persons=[{name:'John Doe', city:'New York'}, {name:'Jane Doe', city:'San Francisco'}]">
+    <br/>
+    <input type="text" ng-model="person" /> {{person}}
+    <br/>
+    <ul>
+        <li ng-repeat="p in persons | filter:person | orderBy:city">{{p.name | uppercase}} - {{p.city}}</li>
+    </ul>
+</div>
+<div class="container" ng-controller="SimpleController">
+    <h3>Adding a simple Controller</h3>
+    <ul>
+        <li ng-repeat="cust in customers">{{cust.name}} - {{cust.city}}</li>
+    </ul>
+</div>
+<div>
+    Below is a ng-view:
+    <div ng-view="">
+
+    </div>
+</div>
+<script type="text/javascript" src="../bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="../bower_components/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="../bower_components/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="../bower_components/lodash/lodash.min.js"></script>
+<script>
+    var demoApp = angular.module('demoApp', ['ngRoute']);
+    function SimpleController($scope) {
+        $scope.customers = [
+            {name: 'Dave Jones', city: 'Phoenix'},
+            {name: 'Jamie Riley', city: 'Atlanta'},
+            {name: 'Heedy Wahlin', city: 'Chandler'},
+            {name: 'Thomas Winter', city: 'Seatle'}
+        ];
+        $scope.addCustomer = function() {
+            $scope.customers.push(
+                {
+                    name: $scope.newCustomer.name,
+                    city: $scope.newCustomer.city
+                }
+            );
+        };
+    }
+    demoApp.controller("SimpleController", SimpleController);
+
+    demoApp.config(function($routeProvider){
+        $routeProvider
+            .when('/view1',
+                {
+                    controller: 'SimpleController',
+                    templateUrl: 'view1.html'
+                })
+            .when('/view2',
+                {
+                    controller: 'SimpleController',
+                    templateUrl: 'view2.html'
+                })
+            .otherwise({redirectTo: '/view1'});
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<div class="container">
+    <h2>Display & Filter</h2>
+    Name:
+    <br />
+    <input type="text" ng-model="person" />
+    <br />
+    <ul>
+        <li ng-repeat="cust in customers | filter:person | orderBy:city">{{cust.name}} - {{cust.city}}</li>
+    </ul>
+
+    <br />
+    Customer Name:<br />
+    <input type="text" ng-model="newCustomer.name" />
+    <br />
+    Customer City:<br />
+    <input type="text" ng-model="newCustomer.city" />
+    <br />
+    <button ng-click="addCustomer()">Add Customer</button>
+    <br />
+    <a href="#/view2">View 2</a>
+
+</div>
