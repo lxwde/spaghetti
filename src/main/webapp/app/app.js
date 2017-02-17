@@ -1,5 +1,4 @@
-(function(angular){
-    angular.module("myApp.controllers", []);
-    angular.module("myApp.services", []);
-    angular.module("myApp", ["ngResource", "myApp.controllers", "myApp.services"]);
+(function(){
+    angular.module("myApp", ["myApp.item", "myApp.archiver"]);
+
 }(angular));

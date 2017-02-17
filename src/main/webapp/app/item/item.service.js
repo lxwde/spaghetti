@@ -1,4 +1,4 @@
-(function(angular){
+(function(){
     var ItemFactory = function($resource){
         return $resource('/api/items/:id', {
             id:'@id'
@@ -13,5 +13,5 @@
     };
 
     ItemFactory.$inject = ['$resource'];
-    angular.module("myApp.services").factory("Item", ItemFactory);
+    angular.module("myApp.item").factory("Item", ItemFactory);
 }(angular));

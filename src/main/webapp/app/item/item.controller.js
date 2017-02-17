@@ -1,5 +1,5 @@
-(function(angular){
-    var AppController = function($scope, Item) {
+(function(){
+    var ItemController = function($scope, Item) {
         Item.query(function(response){
            $scope.items = response?response:[];
         });
@@ -25,9 +25,7 @@
         };
     };
 
-
-
-    AppController.$inject = ['$scope', 'Item'];
-    angular.module("myApp.controllers").controller("AppController", AppController);
+    ItemController.$inject = ['$scope', 'Item'];
+    angular.module("myApp.item").controller("ItemController", ItemController);
 
 }(angular));

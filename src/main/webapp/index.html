@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/main.css" />
 </head>
 <body>
-    <div class="container" ng-controller="AppController">
+    <div class="container" ng-controller="ItemController">
         <div class="page-header">
             <h1>A checklist</h1>
         </div>
@@ -42,8 +42,12 @@
     <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript" src="./bower_components/lodash/lodash.min.js"></script>
     <script type="text/javascript" src="./app/app.js"></script>
-    <script type="text/javascript" src="./app/controllers.js"></script>
-    <script type="text/javascript" src="./app/services.js"></script>
+    <script type="text/javascript" src="./app/item/item.module.js"></script>
+    <script type="text/javascript" src="./app/item/item.controller.js"></script>
+    <script type="text/javascript" src="./app/item/item.service.js"></script>
+    <script type="text/javascript" src="app/archive/archive.module.js"></script>
+    <script type="text/javascript" src="app/archive/archive.controller.js"></script>
+    <script type="text/javascript" src="app/archive/archive.service.js"></script>
     <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
 
     <script>
