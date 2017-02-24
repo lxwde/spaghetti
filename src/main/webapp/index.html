@@ -47,6 +47,10 @@
     <div class="container" ng-controller="ClockController">
         <h5>Hello {{rootNamOfMisc}} - {{clock}}</h5>
     </div>
+    <div class="container" ng-controller="ParseValueController">
+        <input ng-model="expr" type="text" placeholder="Enter an expression"/>
+        <h2>{{parsedValue}}</h2>
+    </div>
     <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript" src="./bower_components/lodash/lodash.min.js"></script>
@@ -64,6 +68,7 @@
     <script type="text/javascript" src="./app/sales-data/sales-data.directive.js"></script>
     <script type="text/javascript" src="./app/misc/misc.module.js"></script>
     <script type="text/javascript" src="./app/misc/clock.controller.js"></script>
+    <script type="text/javascript" src="./app/misc/parse-value.controller.js"></script>
     <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
 
     <script>
