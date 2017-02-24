@@ -1,4 +1,6 @@
 (function(){
-    angular.module("myApp", ["myApp.item", "myApp.archiver"]);
+    angular
+        .module("myApp", ["myApp.item", "myApp.archive", "myApp.salesData", "myApp.misc"]);
 
-}(angular));
+
+}());

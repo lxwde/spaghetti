@@ -5,4 +5,5 @@
    "use strict";
 
    angular.module("myApp.item", ["ngResource"]);
+
 })();
