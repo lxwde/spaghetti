@@ -38,19 +38,141 @@
             </div>
         </form>
     </div>
-    <div class="container" ng-controller="ArchiveController">
-        <div plot-graph></div>
-    </div>
     <div class="container" ng-controller="SalesDataController">
         <div linear-chart chart-data="salesData"></div>
     </div>
     <div class="container" ng-controller="ClockController">
-        <h5>Hello {{rootNamOfMisc}} - {{clock}}</h5>
+        <h5>RootNameOfMisc: {{rootNamOfMisc}} - {{clock}}</h5>
     </div>
     <div class="container" ng-controller="ParseValueController">
         <input ng-model="expr" type="text" placeholder="Enter an expression"/>
         <h2>{{parsedValue}}</h2>
     </div>
+    <div class="container" ng-controller="InterpolateController">
+        <div id="emailEditor">
+            <input ng-model="to" type="email" placeholder="Recipient" />
+            <textarea ng-model="emailBody"></textarea>
+        </div>
+        <div id="emailPreview">
+            <pre>{{previewText | uppercase}}</pre>
+        </div>
+        <input type="text" ng-pattern="a-zA-Z" ng-maxlength=10 placeholder="input characters here"/>
+        <input type="number" placeholder="input numbers here" />
+    </div>
+    <form name="signup_form" novalidate ng-submit="signupForm()" >
+        <fieldset>
+            <legend>Signup</legend>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <lable>Your name</lable>
+                        <input type="text"
+                               placeholder="Name"
+                               name="name"
+                               ng-model="signup.name"
+                               ng-minlength=3
+                               ng-maxlength=20 required/>
+                    </div>
+                    <div class="has-error" ng-show="signup_form.name.$dirty && signup_form.name.$invalid">
+                        <small class="has-error" ng-show="signup_form.name.$error.required">
+                            Your name is required.
+                        </small>
+                        <small class="has-error" ng-show="signup_form.name.$error.minlength">
+                            Your name is required to be at least 3 characters
+                        </small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>Your email</label>
+                        <input type="email"
+                               placeholder="Email"
+                               name="email"
+                               ng-model="signup.email"
+                               ng-minlength=3 ng-maxlength=20 required />
+                        <div class="error"
+                             ng-show="signup_form.email.$dirty && signup_form.email.$invalid">
+                            <small class="error"
+                                   ng-show="signup_form.email.$error.required">
+                                Your email is required.
+                            </small>
+                            <small class="error"
+                                   ng-show="signup_form.email.$error.minlength">
+                                Your email is required to be at least 3 characters
+                            </small>
+                            <small class="error"
+                                   ng-show="signup_form.email.$error.email">
+                                That is not a valid email. Please input a valid email.
+                            </small>
+                            <small class="error"
+                                   ng-show="signup_form.email.$error.maxlength">
+                                Your email cannot be longer than 20 characters
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit"
+                    ng-disabled="signup_form.$invalid"
+                    class="btn-danger">Submit</button>
+        </fieldset>
+    </form>s
+    <div class="container" ng-controller="PeopleController">
+        <p ng-bind="people[0].name"></p>
+        <p ng-cloak>{{people}}</p>
+        <ul>
+            <li ng-repeat="person in people" ng-class="{even: !$even, odd: !$odd}">
+                {{person.name}} lives in {{person.city}}
+            </li>
+        </ul>
+    </div>
+    <div class="container" ng-controller="EquationController">
+        <input type="text" ng-model="equation.x" ng-change="change()"/>
+        <code>{{equation.output}}</code>
+    </div>
+    <div ng-controller="CityController">
+        <select ng-model="city" ng-options="city.name for city in cities">
+            <option value="">Choose City</option>
+        </select>
+        Best City: {{city.name}}
+    </div>
+    <div ng-controller="LotteryController">
+        <div ng-class="{red: x > 5}" ng-if="x > 5">
+            You won!
+        </div>
+        <button ng-click="x = generateNumber()" ng-init="x = 0">
+            Draw Number
+        </button>
+        <p>Number is: {{x}}</p>
+    </div>
+    <div sidebox title="Links">
+        <url>
+            <li>First link</li>
+            <li>Second link</li>
+        </url>
+    </div>
+    <div sidebox title="TagCloud">
+        <div class="tagcloud">
+            <a href="">Graphics</a>
+            <a href="">AngularJS</a>
+            <a href="">D3</a>
+            <a href="">Front-end</a>
+            <a href="">Startup</a>
+        </div>
+    </div>
+    <div ng-controller="GitHubController">
+        <lable for="username">
+            Type in a GitHub username
+        </lable>
+        <input type="text" ng-model="username" placeholder="Enter a GitHub username" />
+        <ul>
+            <li ng-repeat="event in events">
+                <!--{{event|json}}-->
+                {{event.actor.login}} {{event.repo.name}}
+            </li>
+        </ul>
+    </div>
+    <div ng-controller="ArchiveController" plot-graph graph-data="graphLinks">
+    </div>
+
     <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript" src="./bower_components/lodash/lodash.min.js"></script>
@@ -59,30 +181,27 @@
     <script type="text/javascript" src="./app/item/item.controller.js"></script>
     <script type="text/javascript" src="./app/item/item.service.js"></script>
     <script type="text/javascript" src="./app/archive/archive.module.js"></script>
-    <script type="text/javascript" src="./app/archive/archive.controller.js"></script>
     <script type="text/javascript" src="./app/archive/archive.service.js"></script>
-    <script type="text/javascript" src="./app/archive/plotgraph.directive.js"></script>
-    <script type="text/javascript" src="./app/archive/helloworld.directive.js"></script>
+    <script type="text/javascript" src="./app/archive/archive.controller.js"></script>
+    <script type="text/javascript" src="./app/archive/archive.directive.js"></script>
     <script type="text/javascript" src="./app/sales-data/sales-data.module.js"></script>
     <script type="text/javascript" src="./app/sales-data/sales-data.controller.js"></script>
     <script type="text/javascript" src="./app/sales-data/sales-data.directive.js"></script>
     <script type="text/javascript" src="./app/misc/misc.module.js"></script>
+    <script type="text/javascript" src="./app/misc/hello-world.directive.js"></script>
     <script type="text/javascript" src="./app/misc/clock.controller.js"></script>
     <script type="text/javascript" src="./app/misc/parse-value.controller.js"></script>
+    <script type="text/javascript" src="./app/misc/interpolate.controller.js"></script>
+    <script type="text/javascript" src="./app/misc/people.controller.js"></script>
+    <script type="text/javascript" src="./app/misc/equation.controller.js"></script>
+    <script type="text/javascript" src="./app/misc/city.controller.js"></script>
+    <script type="text/javascript" src="./app/misc/lottery.controller.js"></script>
+    <script type="text/javascript" src="./app/misc/sidebox.directive.js"></script>
+    <script type="text/javascript" src="./app/misc/github.service.js"></script>
+    <script type="text/javascript" src="./app/misc/github.controller.js"></script>
     <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
 
     <script>
-//        var app = angular.module('myApp', []);
-//
-//        app.directive('helloWorld', function() {
-//            return {
-//                scope: {},  // use a new isolated scope
-//                restrict: 'AE',
-//                replace: 'true',
-//                template: '<h3>Hello World!!</h3>'
-//            };
-//        });
-
     </script>
 </body>
 </html>

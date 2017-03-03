@@ -6,26 +6,20 @@
 
     angular
         .module("myApp.archive")
-        .factory("archiveService", archiveService);
+        .factory("archiveService", function($http){
+            var url = "http://localhost:8080/api/archive-processing/graph";
 
-    function archiveService($http) {
-        var service = {
-          getTableDependencies: getTableDependencyGraph
-        };
-        return service;
-
-        function getTableDependencyGraph() {
-            return $http.get("/api/archive-processing/graph")
-                .then(getTableDependenciesComplete)
-                .catch(function (message){
-                    // exception.catcher("XHR Failed for getTableDependencyGraph")(message);
-                    // location.url("/");
-                }) ;
-
-            function getTableDependencyGraphComplete(data, status, headers, config) {
-                return data;
+            var runUserRequest = function (dbName) {
+                return $http({
+                    method: "GET",
+                    url: url
+                });
             }
-        }
-    }
 
+            return {
+                events: function (dbName) {
+                    return runUserRequest(dbName);
+                }
+            }
+        });
 })();

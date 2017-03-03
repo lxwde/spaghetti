@@ -5,4 +5,4 @@
     "use strict";
     angular.module("myApp.salesData", []);
 
-}());
+})();

@@ -13,7 +13,7 @@
                    var parseFun = $parse(newVal);
                    $scope.parsedValue = parseFun(scope);
                }
-           })
+           });
        });
 
-}());
+})();

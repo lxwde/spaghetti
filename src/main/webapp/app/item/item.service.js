@@ -14,4 +14,4 @@
 
     ItemFactory.$inject = ['$resource'];
     angular.module("myApp.item").factory("Item", ItemFactory);
-}());
+})();

@@ -28,4 +28,4 @@
     ItemController.$inject = ['$scope', 'Item'];
     angular.module("myApp.item").controller("ItemController", ItemController);
 
-}());
+})();

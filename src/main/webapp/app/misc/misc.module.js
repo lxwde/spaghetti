@@ -11,4 +11,4 @@
            $rootScope.rootNamOfMisc = "World";
        });
 
-}());
+})();

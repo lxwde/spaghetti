@@ -19,10 +19,10 @@
                 {hour: 10,sales: 30}
             ];
 
-            $interval(function(){
-                var hour=$scope.salesData.length+1;
-                var sales= Math.round(Math.random() * 100);
-                $scope.salesData.push({hour: hour, sales:sales});
-            }, 1000, 10);
+            // $interval(function(){
+            //     var hour=$scope.salesData.length+1;
+            //     var sales= Math.round(Math.random() * 100);
+            //     $scope.salesData.push({hour: hour, sales:sales});
+            // }, 1000, 10);
         });
-}());
+})();

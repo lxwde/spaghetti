@@ -2,5 +2,5 @@
  * Created by Administrator on 2017/2/17.
  */
 (function(){
-    angular.module("myApp.archive", ["ngResource"]);
+    angular.module("myApp.archive", []);
 })();

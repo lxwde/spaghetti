@@ -6,13 +6,16 @@
 
     angular
         .module("myApp.archive")
-        .controller("ArchiveController", archiveController);
-
-    archiveController.$inject = ["archiveService"];
-
-    function archiveController($scope, $interval, archiveService) {
-        // $scope.data = archiveService.getTableDependencies();
-
-    };
-
-}());
+        .controller("ArchiveController", ["$scope", "$interval", "archiveService",
+            function($scope, $interval, archiveService){
+                archiveService
+                    .events("dummy")
+                    .success(function(data, status, headers){
+                        $scope.graphLinks = data;
+                    })
+                    .error(function (data, status, headers, config) {
+                        $scope.status = status;
+                    })
+            }
+        ]);
+})();
