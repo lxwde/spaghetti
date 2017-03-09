@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="./css/main.css" />
 </head>
 <body>
+    <div ng-controller="ArchiveController">
+       <h3>{{graphLinks}}</h3>
+    </div>
     <div class="container" ng-controller="ItemController">
         <div class="page-header">
             <h1></h1>
@@ -114,7 +117,7 @@
                     ng-disabled="signup_form.$invalid"
                     class="btn-danger">Submit</button>
         </fieldset>
-    </form>s
+    </form>
     <div class="container" ng-controller="PeopleController">
         <p ng-bind="people[0].name"></p>
         <p ng-cloak>{{people}}</p>
@@ -170,7 +173,9 @@
             </li>
         </ul>
     </div>
-    <div ng-controller="ArchiveController" plot-graph graph-data="graphLinks">
+    <div ng-controller="ArchiveController" graph-data="graphLinks">
+        <h3>{{graphLinks}}</h3>
+        <plot-graph></plot-graph>
     </div>
 
     <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
