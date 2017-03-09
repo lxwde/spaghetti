@@ -1,6 +1,6 @@
 (function(){
     angular
-        .module("myApp", ["myApp.item", "myApp.archive", "myApp.salesData", "myApp.misc"]);
+        .module("myApp", ["myApp.item", "myApp.archive", "myApp.directive", "myApp.salesData", "myApp.misc"]);
 
 
 })();

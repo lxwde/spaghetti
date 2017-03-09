@@ -5,7 +5,7 @@
 (function(){
     "use strict";
 
-    angular.module("myApp.archive")
+    angular.module("myApp.directive")
         .directive("plotGraph", function($parse, $window){
             return {
                 restrict: 'AE',
@@ -13,6 +13,11 @@
                 scope: 'true',
                 template: '<h3>....</h3>',
                 link: function (scope, element, attrs) {
+                    scope.$watch(attrs.graphData, function(options) {
+                        if (scope.graphLinks) {
+                        }
+                    }, true);
+
                     var d3 = $window.d3;
                     var data = scope.graphLinks;
 

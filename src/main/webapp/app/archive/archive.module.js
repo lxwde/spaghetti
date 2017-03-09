@@ -3,4 +3,5 @@
  */
 (function(){
     angular.module("myApp.archive", []);
+    angular.module("myApp.directive", ["myApp.archive"]);
 })();
