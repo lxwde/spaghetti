@@ -12,6 +12,7 @@
                 replace: 'true',
                 scope: 'true',
                 template: '<h3>....</h3>',
+//                require: "^ArchiveController",
                 link: function (scope, element, attrs) {
                     scope.$watch(attrs.graphData, function(options) {
                         if (scope.graphLinks) {
