@@ -147,34 +147,31 @@ public class SimpleTableauTest {
     public void testFetch() {
 
         for(int i = 0; i < NUM_OF_CLIENTS; i++) {
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    try{
-                        WebDriver driver = new ChromeDriver();
-                        drivers.add(driver);
-                        // driver.get("http://121.40.123.43/#/views/App/sheet0?:iid=1");
-                        StopWatch stopWatch = new StopWatch();
-                        stopWatch.start();
-                        driver.get("http://121.40.123.43:8088/tableau?sheet=App/sheet0");
+            executor.execute(() -> {
+                try{
+                    WebDriver driver = new ChromeDriver();
+                    drivers.add(driver);
+                    // driver.get("http://121.40.123.43/#/views/App/sheet0?:iid=1");
+                    StopWatch stopWatch = new StopWatch();
+                    stopWatch.start();
+                    driver.get("http://121.40.123.43:8088/tableau?sheet=App/sheet0");
 
 
-                        System.out.println(driver.getPageSource());
-                        driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
+                    System.out.println(driver.getPageSource());
+                    driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 
-                        WebElement element = (new WebDriverWait(driver, 100))
-                                .until(ExpectedConditions.elementToBeClickable(By.id("tabZoneId1")));
+                    WebElement element = (new WebDriverWait(driver, 100))
+                            .until(ExpectedConditions.elementToBeClickable(By.id("tabZoneId1")));
 
-                        stopWatch.stop();
-                        durations.add(stopWatch.getTotalTimeSeconds());
-                        WebElement ele = driver.findElement(By.id("primaryContentLink"));
-                        System.out.println(ele);
+                    stopWatch.stop();
+                    durations.add(stopWatch.getTotalTimeSeconds());
+                    WebElement ele = driver.findElement(By.id("primaryContentLink"));
+                    System.out.println(ele);
 
-                    } catch(Exception e) {
-                        e.printStackTrace();
-                    } finally{
-                        latch.countDown();
-                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
+                } finally{
+                    latch.countDown();
                 }
             });
 
@@ -189,16 +186,12 @@ public class SimpleTableauTest {
     }
 
     public WebElement fluentWait(WebDriver driver, final By locator, int timeout, int pollingInterval) {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+        Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(timeout, TimeUnit.SECONDS)
                 .pollingEvery(pollingInterval, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);
 
-        WebElement foo = wait.until(new Function<WebDriver, WebElement>() {
-            public WebElement apply(WebDriver driver) {
-                return driver.findElement(locator);
-            }
-        });
+        WebElement foo = wait.until(driver1 -> driver1.findElement(locator));
 
         return  foo;
     };

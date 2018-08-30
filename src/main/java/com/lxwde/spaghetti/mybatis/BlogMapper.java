@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/2/7.
+ *
  */
 @Mapper
 public interface BlogMapper {

@@ -17,7 +17,7 @@ import java.util.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Created by Administrator on 2017/2/7.
+ *
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
