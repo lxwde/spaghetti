@@ -13,7 +13,11 @@ public class DummyScheduler {
     private int counter = 1;
 
     @Scheduled(fixedRate = 1000)
-    public void doSomething() {
+    public void doSomething() throws Exception {
+        if(counter > 5)
+            throw new Exception("dummy failed." + counter++);
+
         logger.debug("doSomething. counter={}", counter++);
+
     }
 }

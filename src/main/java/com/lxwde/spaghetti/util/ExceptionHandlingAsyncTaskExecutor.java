@@ -51,6 +51,7 @@ public class ExceptionHandlingAsyncTaskExecutor implements AsyncTaskExecutor,
                 task.run();
             } catch (Exception e) {
                 handle(e);
+                throw e;
             }
         };
     }

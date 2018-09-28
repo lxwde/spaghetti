@@ -1,24 +1,26 @@
 package com.lxwde.spaghetti;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.slf4j.impl.StaticLoggerBinder;
 
 /**
  * Created by Administrator on 2017/2/20.
  */
 
-public class ExceptionTest {
+public class DummyTest {
 
     @Test
-    public void test() {
-        System.out.println(testInternal());
+    public void testException() {
+        System.out.println(testExceptionInternal());
     }
 
-    public static String testInternal()
-    {
+    @Test
+    public void testSlf4j() {
+        StaticLoggerBinder binder = StaticLoggerBinder.getSingleton();
+        System.out.println(binder.getLoggerFactoryClassStr());
+    }
+
+    public static String testExceptionInternal() {
         try {
             System.out.println("try");
             throw new Exception();

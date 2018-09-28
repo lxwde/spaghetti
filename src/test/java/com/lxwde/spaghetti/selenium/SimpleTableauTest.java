@@ -2,6 +2,7 @@ package com.lxwde.spaghetti.selenium;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -29,7 +30,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
-
+@Ignore
 public class SimpleTableauTest {
 
     private List<WebDriver> drivers = Collections.synchronizedList(new ArrayList<>());

@@ -28,7 +28,10 @@ public class AsyncConfiguration implements AsyncConfigurer {
     public Executor getAsyncExecutor() {
         log.debug("Creating Async Task Executor");
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        return new ExceptionHandlingAsyncTaskExecutor(executor);
+        executor.setCorePoolSize(4);
+        executor.setMaxPoolSize(10);
+        //return new ExceptionHandlingAsyncTaskExecutor(executor);
+        return executor;
     }
 
     @Override
