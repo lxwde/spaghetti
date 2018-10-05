@@ -4,13 +4,13 @@ import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.RoundEnvironment;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.*;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -31,7 +31,18 @@ public class FactoryProcessor extends AbstractProcessor {
             TypeElement typeElement = (TypeElement)annotatedElement;
             try {
                 FactoryAnnotatedClass annotatedClass = new FactoryAnnotatedClass(typeElement);
+                if (!isValidClass(annotatedClass)) {
+                    return true;
+                }
 
+                FactoryGroupedClasses factoryClass = factoryClasses.get(annotatedClass.getQualifiedSuperClassName());
+                if (factoryClass == null) {
+                    String qualifiedGroupName = annotatedClass.getQualifiedSuperClassName();
+                    factoryClass = new FactoryGroupedClasses(qualifiedGroupName);
+                    factoryClasses.put(qualifiedGroupName, factoryClass);
+                }
+
+                factoryClass.add(annotatedClass);
             }catch(IllegalArgumentException e) {
                 if (annotatedElement.getKind() != ElementKind.CLASS) {
                     error(annotatedElement, "Only classes can be annotated with @%s", Factory.class.getSimpleName());
@@ -40,7 +51,14 @@ public class FactoryProcessor extends AbstractProcessor {
             }
         }
 
-        return false;
+        try {
+            for (FactoryGroupedClasses factoryClass : factoryClasses.values()) {
+                factoryClass.generateCode(elementUtils, filer);
+            }
+        } catch (IOException e) {
+            error(null, e.getMessage());
+        }
+        return true;
     }
 
     private void error(Element element, String msg, Object... args) {
@@ -71,6 +89,40 @@ public class FactoryProcessor extends AbstractProcessor {
                         item.getQualifiedSuperClassName());
                 return false;
             }
+        } else {
+            // check subclassing
+            TypeElement currentClass = classElement;
+            while(true) {
+                TypeMirror superClassType = currentClass.getSuperclass();
+                if (superClassType.getKind() == TypeKind.NONE) {
+                    error(classElement, "The class %s annotated with @%s must inherit from %s",
+                            classElement.getQualifiedName().toString(), Factory.class.getSimpleName(),
+                            item.getQualifiedSuperClassName());
+                    return false;
+                }
+
+                if (superClassType.toString().equals(item.getQualifiedSuperClassName())) {
+                    break;
+                }
+
+                currentClass = (TypeElement)typeUtils.asElement(superClassType);
+            }
+
+            // check if an empty public constructor is given
+            for (Element enclosed : classElement.getEnclosedElements()) {
+                if (enclosed.getKind() == ElementKind.CONSTRUCTOR) {
+                    ExecutableElement constructorElement = (ExecutableElement)enclosed;
+                    if (constructorElement.getParameters().size() == 0 &&
+                            constructorElement.getModifiers().contains(Modifier.PUBLIC)) {
+                        return true;
+                    }
+                }
+            }
+
+            // No empty constructor found
+            error(classElement, "The class %s must provide an public empty default constructor",
+                    classElement.getQualifiedName().toString());
+            return false;
         }
 
         return true;
