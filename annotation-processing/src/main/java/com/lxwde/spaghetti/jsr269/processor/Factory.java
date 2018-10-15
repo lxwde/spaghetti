@@ -1,4 +1,4 @@
-package com.lxwde.spaghetti.jsr269.factory;
+package com.lxwde.spaghetti.jsr269.processor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -121,28 +121,39 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.9.1</version>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>com.squareup</groupId>-->
-			<!--<artifactId>javapoet</artifactId>-->
-			<!--<version>1.11.1</version>-->
-		<!--</dependency>-->
 
 		<dependency>
-			<groupId>com.squareup</groupId>
-			<artifactId>javawriter</artifactId>
-			<version>2.5.1</version>
+			<groupId>com.lxwde</groupId>
+			<artifactId>annotation-processing</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <generatedSourcesDirectory>${project.build.directory}/generated-sources</generatedSourcesDirectory>
+                    <annotationProcessors>
+                        <annotationProcessor>
+                            com.lxwde.spaghetti.jsr269.processor.FactoryProcessor
+                        </annotationProcessor>
+                    </annotationProcessors>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 	<repositories>
 		<repository>

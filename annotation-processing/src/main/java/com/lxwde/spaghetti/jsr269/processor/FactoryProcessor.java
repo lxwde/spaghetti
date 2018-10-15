@@ -1,9 +1,9 @@
-package com.lxwde.spaghetti.jsr269.factory;
+package com.lxwde.spaghetti.jsr269.processor;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Filer;
-import javax.annotation.processing.Messager;
-import javax.annotation.processing.RoundEnvironment;
+import com.google.auto.service.AutoService;
+
+import javax.annotation.processing.*;
+import javax.lang.model.SourceVersion;
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
@@ -15,7 +15,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-
+@SupportedAnnotationTypes("com.lxwde.spaghetti.jsr269.processor.Factory")
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@AutoService(Processor.class)
 public class FactoryProcessor extends AbstractProcessor {
 
     private Types typeUtils;
@@ -23,6 +25,15 @@ public class FactoryProcessor extends AbstractProcessor {
     private Filer filer;
     private Messager messager;
     private Map<String, FactoryGroupedClasses> factoryClasses = new LinkedHashMap<>();
+
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+        typeUtils = processingEnv.getTypeUtils();
+        elementUtils = processingEnv.getElementUtils();
+        filer = processingEnv.getFiler();
+        messager = processingEnv.getMessager();
+    }
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
@@ -55,6 +66,9 @@ public class FactoryProcessor extends AbstractProcessor {
             for (FactoryGroupedClasses factoryClass : factoryClasses.values()) {
                 factoryClass.generateCode(elementUtils, filer);
             }
+
+            factoryClasses.clear();
+
         } catch (IOException e) {
             error(null, e.getMessage());
         }

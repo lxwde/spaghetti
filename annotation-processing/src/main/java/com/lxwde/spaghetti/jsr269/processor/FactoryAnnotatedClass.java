@@ -1,6 +1,4 @@
-package com.lxwde.spaghetti.jsr269.factory;
-
-import org.springframework.util.StringUtils;
+package com.lxwde.spaghetti.jsr269.processor;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
@@ -18,7 +16,7 @@ public class FactoryAnnotatedClass {
         Factory annotation = classElement.getAnnotation(Factory.class);
         id = annotation.id();
 
-        if (StringUtils.isEmpty(id)) {
+        if (id.isEmpty()) {
             throw new IllegalArgumentException(
                     String.format("id() in @%s for class %s is null or empty! that's not allowed",
                             Factory.class.getSimpleName(), classElement.getQualifiedName().toString())

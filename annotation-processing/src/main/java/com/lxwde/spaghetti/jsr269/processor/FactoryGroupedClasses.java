@@ -1,4 +1,4 @@
-package com.lxwde.spaghetti.jsr269.factory;
+package com.lxwde.spaghetti.jsr269.processor;
 
 import com.squareup.javawriter.JavaWriter;
 
@@ -49,7 +49,7 @@ public class FactoryGroupedClasses {
 
         jw.beginType(factoryClassName, "class", EnumSet.of(Modifier.PUBLIC));
         jw.emitEmptyLine();
-        jw.beginMethod(qualifiedClassName, "create", EnumSet.of(Modifier.PUBLIC), "String", "id");
+        jw.beginMethod(qualifiedClassName, "create", EnumSet.of(Modifier.PUBLIC, Modifier.STATIC), "String", "id");
 
         jw.beginControlFlow("if (id == null)");
         jw.emitStatement("throw new IllegalArgumentException(\"id is null!\")");
