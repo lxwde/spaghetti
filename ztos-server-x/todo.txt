@@ -1,0 +1,42 @@
+权限管理 OAuth
+Groovy / Kotlin / Jython 应用扩展，提供客户化定制接入点
+Mongo DB
+Add redis cache to JPA
+XML RPC / REST / Auth  与第三方对接采用何种方式
+Extension Plugin:
+
+
+
+
+多线程
+确定 enum: Inventory and Yard
+相关interface确定
+
+1. Atom Enum 可继承的enum
+2. GetBean 
+3. 重写Hibernate API， 重用JPA
+4. UserContext 定义数据结构
+5. Event 进程内订阅和通知
+6. ExecutorService 
+
+1. AtomizedEnum 重命名
+2. Inventory in BillingExtractEntityEnum 重命名 
+3. BizRoleName  重命名
+4. CarrierModeEnum 重命名
+
+5. Che: Container handling equiment
+
+6. UserContext   
+7. 重命名 xxxHelper to xxxUtility
+8. 使用 JPA 替换 xxxPredicate
+
+9. Event Listner订阅通知机制实现， 进程内，进程间MQ. 例如： FieldChange
+10. Rostery  beanFactory.getBean() 是否可以用Spring BeanFactory替换
+11. ScopeCoordinates
+12. 多语言支持
+13. JobCongiruationDO如何替换
+14. ProblemSolution 如何使用 executeStategy
+
+
+
+

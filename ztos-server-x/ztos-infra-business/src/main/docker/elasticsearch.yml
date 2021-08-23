@@ -1,0 +1,10 @@
+version: '2'
+services:
+    tplatform-elasticsearch:
+        container_name: tplatform-elasticsearch
+        image: elasticsearch:1.7.5
+        # volumes:
+        #     - ~/volumes/tplatform/elasticsearch/:/usr/share/elasticsearch/data/
+        ports:
+            - 9200:9200
+            - 9300:9300
