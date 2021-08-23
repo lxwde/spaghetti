@@ -1,5 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.zpmc.ztos.infra.base.utils.context.SpringContextHolder,\
-        com.zpmc.ztos.infra.base.utils.context.SpringUtils
-
-  
