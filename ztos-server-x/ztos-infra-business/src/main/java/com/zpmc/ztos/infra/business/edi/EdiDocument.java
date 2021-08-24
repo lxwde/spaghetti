@@ -3,20 +3,24 @@ package com.zpmc.ztos.infra.business.edi;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import java.util.UUID;
+
 @Document(collection = "ediDocument")
 public class EdiDocument {
 
     @Id
-    private Long id;
+    private String id;
     private String author;
     private String docType;
     private String content;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
