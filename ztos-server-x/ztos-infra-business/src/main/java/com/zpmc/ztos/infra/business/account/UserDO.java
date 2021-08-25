@@ -1,13 +1,15 @@
 package com.zpmc.ztos.infra.business.account;
 
 import com.zpmc.ztos.infra.business.base.AbstractEntity;
-
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cache;
 import javax.persistence.*;
 import java.util.Objects;
 
 
 @MappedSuperclass
 @Table(name = "dummy")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class UserDO extends AbstractEntity {
 
 	private static final long serialVersionUID = 5673334451789813703L;

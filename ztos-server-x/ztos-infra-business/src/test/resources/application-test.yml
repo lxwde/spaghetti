@@ -19,8 +19,8 @@ spring:
       ddl-auto: none
       naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
     properties:
-      hibernate.cache.use_second_level_cache: false
-      hibernate.cache.use_query_cache: false
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: true
       hibernate.generate_statistics: true
       hibernate.hbm2ddl.auto: validate
 
@@ -43,3 +43,10 @@ security:
 server:
   port: 8080
   address: localhost
+
+application:
+  cache:
+    redis:
+      expiration: 3600
+      server: redis://localhost:6379
+      cluster: false

@@ -6,12 +6,14 @@ import com.zpmc.ztos.infra.base.event.ZpmcEventBus;
 import com.zpmc.ztos.infra.business.DummyApp;
 import com.zpmc.ztos.infra.business.account.User;
 import com.zpmc.ztos.infra.business.account.service.UserService;
+import com.zpmc.ztos.infra.business.config.TestRedisConfiguration;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -19,7 +21,7 @@ import javax.persistence.criteria.*;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = DummyApp.class)
+@SpringBootTest(classes = {DummyApp.class})
 public class UserRepositoryTest {
 
     @Autowired

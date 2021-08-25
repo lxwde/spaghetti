@@ -1,5 +1,6 @@
 package com.zpmc.ztos.infra.business.edi;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,7 +15,8 @@ public class EdiDocument {
     private String id;
     private String author;
     private String docType;
-    private String content;
+    private Binary content;
+    private String fileId;
 
     public String getId() {
         return id;
@@ -40,11 +42,11 @@ public class EdiDocument {
         this.docType = docType;
     }
 
-    public String getContent() {
+    public Binary getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(Binary content) {
         this.content = content;
     }
 
