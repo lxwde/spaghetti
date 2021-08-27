@@ -55,6 +55,7 @@ public class UserRepositoryTest {
         User user2 = User.findOneByFirstNameAndLastName("admin", "AAXXAA");
         System.out.println(user2);
 
+
 //        Boolean isAdmin = this.userService.isAdmin(user2);
 //        System.out.println(isAdmin);
     }

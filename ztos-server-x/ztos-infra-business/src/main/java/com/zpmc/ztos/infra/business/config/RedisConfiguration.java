@@ -1,5 +1,6 @@
 package com.zpmc.ztos.infra.business.config;
 
+import com.zpmc.ztos.infra.business.account.UserDO;
 import org.hibernate.cache.jcache.ConfigSettings;
 import org.redisson.Redisson;
 import org.redisson.config.ClusterServersConfig;
@@ -70,11 +71,7 @@ public class RedisConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer(javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration) {
         return cm -> {
-//            createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_LOGIN_CACHE, jcacheConfiguration);
-//            createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_EMAIL_CACHE, jcacheConfiguration);
-//            createCache(cm, com.mycompany.myapp.domain.User.class.getName(), jcacheConfiguration);
-//            createCache(cm, com.mycompany.myapp.domain.Authority.class.getName(), jcacheConfiguration);
-//            createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            createCache(cm, UserDO.class.getName(), jcacheConfiguration);
         };
     }
 
