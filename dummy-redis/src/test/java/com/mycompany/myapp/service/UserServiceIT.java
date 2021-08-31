@@ -197,10 +197,10 @@ class UserServiceIT {
         Optional<User> maybeDbUser = userRepository.findById(dbUser.getId());
         assertThat(maybeDbUser).contains(dbUser);
 
-        maybeDbUser = userRepository.findById(dbUser.getId());
+        maybeDbUser = userRepository.findOneByLogin(dbUser.getLogin());
         assertThat(maybeDbUser).contains(dbUser);
 
-        maybeDbUser = userRepository.findById(dbUser.getId());
+        maybeDbUser = userRepository.findOneByLogin(dbUser.getLogin());
         assertThat(maybeDbUser).contains(dbUser);
         // Verify Elasticsearch mock
         verify(mockUserSearchRepository, never()).delete(user);

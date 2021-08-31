@@ -52,6 +52,9 @@ public class UserRepositoryTest {
         List<User> all = User.findAllByFirstName("admin");
         System.out.println(all);
 
+        List<User> cached = User.findAllByFirstName("admin");
+        System.out.println(cached);
+
         User user2 = User.findOneByFirstNameAndLastName("admin", "AAXXAA");
         System.out.println(user2);
 

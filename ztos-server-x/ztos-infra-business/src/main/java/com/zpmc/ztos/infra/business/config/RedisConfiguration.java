@@ -21,6 +21,8 @@ import javax.cache.expiry.Duration;
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
 
+import static com.zpmc.ztos.infra.business.account.repository.UserRepository.FIND_ALL_BY_FIRST_NAME;
+
 @Configuration
 @EnableCaching
 public class RedisConfiguration {
@@ -72,6 +74,7 @@ public class RedisConfiguration {
     public JCacheManagerCustomizer cacheManagerCustomizer(javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration) {
         return cm -> {
             createCache(cm, UserDO.class.getName(), jcacheConfiguration);
+            createCache(cm, FIND_ALL_BY_FIRST_NAME, jcacheConfiguration);
         };
     }
 

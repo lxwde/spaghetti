@@ -16,6 +16,7 @@ public class RedisTestContainerExtension implements BeforeAllCallback {
 //        if (!started.get()) {
 //            redis.start();
 //            System.setProperty("jhipster.cache.redis.server", "redis://" + redis.getContainerIpAddress() + ":" + redis.getMappedPort(6379));
+        System.setProperty("jhipster.cache.redis.server", "redis://" + "127.0.0.1" + ":" + 6379);
 //            started.set(true);
 //        }
     }
