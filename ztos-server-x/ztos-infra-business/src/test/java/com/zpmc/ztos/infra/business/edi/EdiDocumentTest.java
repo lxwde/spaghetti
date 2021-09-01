@@ -57,12 +57,12 @@ public class EdiDocumentTest {
         InputStream inputStream = new ByteArrayInputStream(ediDocument1.getContent().getData());
         System.out.println(inputStream);
 
-        ObjectId id = gridFsTemplate.store(inputStream, "img.png");
+        ObjectId id = gridFsTemplate.store(inputStream, "big-file.png");
         System.out.println(id);
 
         GridFSFile file = gridFsTemplate.findOne(new Query(Criteria.where("_id").is(id)));
         System.out.println(file.getFilename());
-        GridFsResource resource = gridFsOperations.getResource("img.png");
+        GridFsResource resource = gridFsOperations.getResource("big-file.png");
         System.out.println(IOUtils.toByteArray(resource.getInputStream()));
     }
 }

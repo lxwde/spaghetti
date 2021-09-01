@@ -15,6 +15,8 @@ public class EdiDocument {
     private String id;
     private String author;
     private String docType;
+    private String fileName;
+    private String directory;
     private Binary content;
     private String fileId;
 
