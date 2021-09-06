@@ -11,7 +11,7 @@ spring:
     username:
     password:
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.spatial.dialect.h2geodb.GeoDBDialect
     database: H2
     open-in-view: false
     show_sql: true
