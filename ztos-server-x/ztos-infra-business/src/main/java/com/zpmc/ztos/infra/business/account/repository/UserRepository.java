@@ -17,5 +17,5 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
     @Cacheable(value = FIND_ALL_BY_FIRST_NAME, key = "#p0")
     List<User> findAllByFirstName(String firstName);
     User findOneByFirstNameAndLastName(String firstName, String lastName);
-    Page<User> findByFirstName(String firstName, Pageable pageable);
+    List<User> findByFirstName(String firstName, Pageable pageable);
 }
