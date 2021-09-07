@@ -8,14 +8,23 @@ import com.zpmc.ztos.infra.business.account.User;
 import com.zpmc.ztos.infra.business.account.service.UserService;
 import com.zpmc.ztos.infra.business.config.TestRedisConfiguration;
 import org.assertj.core.api.Assertions;
+import org.geolatte.geom.*;
+import org.geolatte.geom.crs.CoordinateReferenceSystem;
+import org.geolatte.geom.crs.CrsRegistry;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.locationtech.jts.geom.Coordinate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.hibernate.annotations.Type;
+import org.geolatte.geom.codec.Wkb;
+import org.geolatte.geom.codec.WkbDecoder;
+import org.geolatte.geom.codec.WkbEncoder;
+import org.geolatte.geom.codec.Wkb.Dialect;
 
 import javax.persistence.criteria.*;
 import java.util.List;
@@ -40,6 +49,9 @@ public class UserRepositoryTest {
 
         Assertions.assertThat(count).isEqualTo(0);
         User user = User.create("admin", "AAXXAA");
+        org.geolatte.geom.Point<C2D> point1 = Geometries.mkPoint(new C2D(12.34343, 12.232424), CrsRegistry.getProjectedCoordinateReferenceSystemForEPSG(3785));
+        user.setLocation(point1);
+        user.update();
 
         count = User.count();
         System.out.println(count);

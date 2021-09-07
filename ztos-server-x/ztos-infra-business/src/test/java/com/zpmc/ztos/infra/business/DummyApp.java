@@ -27,6 +27,13 @@ public class DummyApp {
 
     private static final Logger log = LoggerFactory.getLogger(DummyApp.class);
 
+//    @Bean
+//    public boolean initGeoDB(final DataSource dataSource) throws SQLException {
+//        final Connection cx = dataSource.getConnection();
+//        GeoDB.InitGeoDB(cx);
+//        return true;
+//    }
+
     @Autowired
     private Environment env;
 
