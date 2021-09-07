@@ -7,9 +7,11 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
+@Table(name = "dummy")
 public class User extends UserDO implements RepositoryEnabled<UserRepository> {
     public static final String FIRST_NAME = "firstName";
     public static final String LAST_NAME = "lastName";

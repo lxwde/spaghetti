@@ -41,7 +41,7 @@ public class UserDO extends AbstractEntity {
 	private String lastName;
 
 	@Column(name = "location",columnDefinition="GEOMETRY(Point, 4326)")
-	@Type(type = "org.hibernate.spatial.GeolatteGeometryType")
+	//@Type(type = "org.hibernate.spatial.GeolatteGeometryType")
 	private Point location;
 
 	public Integer getId() {

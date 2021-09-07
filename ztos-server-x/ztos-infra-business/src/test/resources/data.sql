@@ -5,7 +5,7 @@ CREATE TABLE dummy (
   last_name VARCHAR(255) NOT NULL,
   created_by VARCHAR(50) NOT NULL,
   created_date TIMESTAMP NOT NULL,
-  location GEOMETRY(Point, 4326),
+  location GEOMETRY,
   last_modified_by VARCHAR(50) NOT NULL,
   last_modified_date TIMESTAMP NOT NULL
 );
