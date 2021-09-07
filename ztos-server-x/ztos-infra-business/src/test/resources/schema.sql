@@ -20,7 +20,7 @@ CREATE TABLE yard_allocation_filter (
     pod VARCHAR(50),
     trade_code VARCHAR(50),
     freight_kind INT,
-    category VARCHAR(50),
+    category INT,
     is_reefer BIT,
     is_hazardous BIT,
     is_damaged BIT,
