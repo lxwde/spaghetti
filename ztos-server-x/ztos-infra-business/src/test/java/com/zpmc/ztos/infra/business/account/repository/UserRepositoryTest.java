@@ -11,6 +11,7 @@ import org.assertj.core.api.Assertions;
 import org.geolatte.geom.*;
 import org.geolatte.geom.crs.CoordinateReferenceSystem;
 import org.geolatte.geom.crs.CrsRegistry;
+import org.hibernate.spatial.SpatialFunction;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.locationtech.jts.geom.Coordinate;
@@ -107,7 +108,7 @@ public class UserRepositoryTest {
         });
         System.out.println(users);
 
-        users = User.findAll((Specification<User>) (root, query, cb) -> {
+        users = User.findAll((root, query, cb) -> {
             Predicate predicate = cb.equal(root.get(User.FIRST_NAME), "admin");
             predicate = cb.and(predicate, cb.like(root.get(User.LAST_NAME), "%XX%"));
             // where firstName = 'admin' and lastName like '%XX%'
@@ -116,5 +117,19 @@ public class UserRepositoryTest {
         });
         System.out.println(users);
 
+        double longitude  = 0d, latitude = 0d, radius = 10d;
+
+        users = User.findAll((root, query, builder) -> {
+            Expression<Geometry> geography = builder.function("geography", Geometry.class, root.get("location"));
+            Expression<Point> point = builder.function("ST_Point", Point.class, builder.literal(longitude),
+                    builder.literal(latitude));
+            Expression<Point> comparisonPoint = builder.function("ST_SetSRID", Point.class, point,
+                    builder.literal(4326));
+            Expression<Boolean> expression = builder.function(SpatialFunction.dwithin.toString(), boolean.class,
+                    geography, comparisonPoint, builder.literal(radius));
+            return builder.equal(expression, true);
+        });
+
+        System.out.println(users);
     }
 }
