@@ -104,7 +104,7 @@ public class UserRepositoryTest {
             predicate = cb.and(predicate, cb.equal(root.get(User.LAST_NAME), "AAXXAA"));
             // where (firstName = 'admin' and lastName = 'AAXXAA')
             query.where(predicate);
-            return null;
+            return predicate;
         });
         System.out.println(users);
 
@@ -113,7 +113,7 @@ public class UserRepositoryTest {
             predicate = cb.and(predicate, cb.like(root.get(User.LAST_NAME), "%XX%"));
             // where firstName = 'admin' and lastName like '%XX%'
             query.where(predicate);
-            return null;
+            return predicate;
         });
         System.out.println(users);
 

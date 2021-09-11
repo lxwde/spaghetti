@@ -21,7 +21,4 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
     // @Query(" where location SDO_GEOM.SDO_CENTROID(#firstName)")
     User findOneByFirstNameAndLastName(String firstName, String lastName);
     List<User> findByFirstName(String firstName, Pageable pageable);
-
-    @Query("")
-    List<User> findUsersByLocation(Polygon location);
 }
