@@ -1,17 +1,20 @@
 package com.zpmc.ztos.infra.business.account;
 
+import com.google.common.base.Objects;
 import com.zpmc.ztos.infra.base.config.ApplicationContextProvider;
 import com.zpmc.ztos.infra.business.account.repository.UserRepository;
 import com.zpmc.ztos.infra.business.base.RepositoryEnabled;
+import org.geolatte.geom.Point;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.Nullable;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
-@Table(name = "dummy")
+@Table(name = "dummy", schema = "HR")
 public class User extends UserDO implements RepositoryEnabled<UserRepository> {
     public static final String FIRST_NAME = "firstName";
     public static final String LAST_NAME = "lastName";
@@ -39,8 +42,11 @@ public class User extends UserDO implements RepositoryEnabled<UserRepository> {
         return getUserRepository().findById(id).get();
     }
 
+    private static final AtomicInteger seed = new AtomicInteger(new Random(10000000).nextInt());
+
     public static User create(String firstName, String lastName) {
         User user = new User(firstName, lastName);
+        user.setId(seed.incrementAndGet());
         getUserRepository().save(user);
         return user;
     }

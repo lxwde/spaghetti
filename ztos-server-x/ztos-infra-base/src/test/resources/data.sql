@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS dummy;
 CREATE TABLE dummy (
   id INT AUTO_INCREMENT  PRIMARY KEY,
-  first_name VARCHAR(255) NOT NULL,
+  first_name1 VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
   created_by VARCHAR(50) NOT NULL,
   created_date TIMESTAMP NOT NULL,

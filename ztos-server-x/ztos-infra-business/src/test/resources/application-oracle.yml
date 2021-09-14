@@ -1,0 +1,65 @@
+server:
+  port: 9403
+  servlet:
+    context-path: /mspace
+
+
+spring:
+  application:
+    name: mspace-service
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    password: oracle
+    url: jdbc:oracle:thin:@127.0.0.1:49161:hr
+    username: system
+  jpa:
+    database-platform: org.hibernate.spatial.dialect.oracle.OracleSpatial10gDialect
+    database: ORACLE
+    open-in-view: TRUE
+    show_sql: true
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+    properties:
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+  #      hibernate.hbm2ddl.auto: validate
+
+
+  #  create 启动时删数据库中的表，然后创建，退出时不删除数据表
+  #  create-drop 启动时删数据库中的表，然后创建，退出时删除数据表 如果表不存在报错
+  #  update 如果启动时表格式不一致则更新表，原有数据保留
+  #  validate 项目启动表结构进行校验 如果不一致则报错
+
+
+
+  rabbitmq:
+    host: 10.28.120.88
+    port: 5672
+    username: admin
+    password: admin
+  redis:
+    host: 10.28.120.88
+    port: 6379
+    password: P@ssw0rd
+
+
+
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    #    port: 9127
+    ssl:
+      enabled: false
+  metrics:
+    tags:
+      application: ${spring.application.name}
+

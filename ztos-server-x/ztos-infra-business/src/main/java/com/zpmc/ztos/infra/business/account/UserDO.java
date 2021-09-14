@@ -19,7 +19,6 @@ import javax.persistence.*;
 
 
 @MappedSuperclass
-@Table(name = "dummy")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class UserDO extends AbstractEntity {
 
@@ -31,7 +30,7 @@ public class UserDO extends AbstractEntity {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name = "first_name")
@@ -40,9 +39,8 @@ public class UserDO extends AbstractEntity {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "location",columnDefinition="GEOMETRY(Point, 4326)")
-	//@Type(type = "org.hibernate.spatial.GeolatteGeometryType")
-	private Point location;
+	@Column(name = "location", columnDefinition="SDO_GEOMETRY")
+	private Geometry location;
 
 	public Integer getId() {
 		return id;
@@ -68,11 +66,11 @@ public class UserDO extends AbstractEntity {
 		this.lastName = lastName;
 	}
 
-	public Point getLocation() {
+	public Geometry getLocation() {
 		return location;
 	}
 
-	public void setLocation(Point location) {
+	public void setLocation(Geometry location) {
 		this.location = location;
 	}
 
