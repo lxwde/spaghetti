@@ -186,6 +186,11 @@
             <artifactId>hibernate-spatial</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.geolatte</groupId>
+            <artifactId>geolatte-geojson</artifactId>
+            <version>1.6.0</version>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.opengeo</groupId>-->
 <!--            <artifactId>geodb</artifactId>-->

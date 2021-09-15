@@ -4,6 +4,7 @@ import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
+import org.geolatte.geom.json.GeolatteGeomModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.zalando.problem.ProblemModule;
@@ -46,4 +47,6 @@ public class JacksonConfiguration {
         return new ProblemModule();
     }
 
+    @Bean
+    GeolatteGeomModule geolatteGeomModule() { return new GeolatteGeomModule();}
 }
