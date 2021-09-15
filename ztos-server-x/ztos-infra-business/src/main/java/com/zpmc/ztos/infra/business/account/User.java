@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
-@Table(name = "dummy", schema = "HR")
+@Table(name = "dummy")
 public class User extends UserDO implements RepositoryEnabled<UserRepository> {
     public static final String FIRST_NAME = "firstName";
     public static final String LAST_NAME = "lastName";

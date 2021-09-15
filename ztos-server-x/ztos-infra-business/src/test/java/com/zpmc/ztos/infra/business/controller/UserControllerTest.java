@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
@@ -20,9 +21,9 @@ public class UserControllerTest {
 
     @Test
     @Transactional
-    void testAuthorize() throws Exception {
-        mockMvc
-                .perform(get("/api/geo").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+    void testGeo() throws Exception {
+        mockMvc.perform(get("/api/geo").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print());
     }
 }
