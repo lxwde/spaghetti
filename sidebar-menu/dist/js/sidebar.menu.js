@@ -6,16 +6,15 @@ $(() => {
             $(linkArrow).addClass('up');
             if ($(linkArrow).hasClass('link-current')) {
                 $(linkArrow).addClass('active', 'down');
-                $(linkArrow).next().attr('display', 'block');
+                $(linkArrow).next().css('display', 'block');
             }
 
             $(linkArrow).on('click', (event) => {
                 event.preventDefault();
                 slideToggle($(linkArrow).next(), 200);
-                $(linkArrow).add('transition');
-                $(linkArrow).add('active');
-                $(linkArrow).add('rotate');
-
+                $(linkArrow).addClass('transition');
+                $(linkArrow).toggleClass('active');
+                $(linkArrow).toggleClass('rotate');
                 $(linkArrow).toggleClass('link-current');
             });
         });
@@ -30,47 +29,56 @@ $(() => {
     }
 
     function slideUp(target, duration = 500) {
-        $(target).prop('transitionProperty', 'height, margin, padding');
-        $(target).prop('transitionDuration', duration + 'ms');
-        $(target).prop('boxSizing', 'border-box');
-        $(target).prop('height', target.offsetHeight + 'px');
-        $(target).prop('overflow', 'hidden');
-        $(target).prop('height', 0);
-        $(target).prop('paddingTop', 0);
-        $(target).prop('paddingBottom', 0);
-        $(target).prop('marginTop', 0);
-        $(target).prop('marginBottom', 0);
+        $(target).css('transitionProperty', 'height, margin, padding');
+        $(target).css('transitionDuration', duration + 'ms');
+        $(target).css('boxSizing', 'border-box');
+        $(target).css('height', target.offsetHeight + 'px');
+        $(target).css('overflow', 'hidden');
+        $(target).css('height', 0);
+        $(target).css('paddingTop', 0);
+        $(target).css('paddingBottom', 0);
+        $(target).css('marginTop', 0);
+        $(target).css('marginBottom', 0);
         setTimeout(() => {
-            $(target).prop('display', 'none');
-            $(target).removeProp('height', 'padding-top', 'padding-bottom',
-                'margin-top', 'margin-bottom', 'overflow', 
-                'transition-duration', 'transition-property');
+            $(target).css('display', 'none');
+            $(target).css('height', '');
+            $(target).css('padding-top', '');
+            $(target).css('padding-bottom', '');
+            $(target).css('margin-top', '');
+            $(target).css('margin-bottom', '');
+            $(target).css('overflow', '');
+            $(target).css('transition-duration', '');
+            $(target).css('transition-property', '');
         }, duration);
 
     }
 
-    function slideDown(target, duration = 500) {
-        $(target).removeProp('display');
-        if ($(target).prop('display') == 'none') {
-            $(target).prop('display', 'block')
+    let slideDown = (target, duration= 500) => {
+        if ($(target).css('display') === 'none') {
+            $(target).css('display', 'block');
         }
 
-        $(target).prop('overflow', 'hidden');
-        $(target).prop('height', 0);
-        $(target).prop('paddingTop', 0);
-        $(target).prop('paddingBottom', 0);
-        $(target).prop('marginTop', 0);
-        $(target).prop('marginBottom', 0);
-        $(target).prop('boxSizing', 'border-box');
-        $(target).prop('transitionProperty', 'height, margin, padding');
-        $(target).prop('transitionDuration', duration + 'ms');
-        $(target).prop('height', target.offsetHeight + 'px');
+        $(target).css('overflow', 'hidden');
+        $(target).css('height', 0);
+        $(target).css('paddingTop', 0);
+        $(target).css('paddingBottom', 0);
+        $(target).css('marginTop', 0);
+        $(target).css('marginBottom', 0);
+        $(target).css('boxSizing', 'border-box');
+        $(target).css('transitionProperty', 'height, margin, padding');
+        $(target).css('transitionDuration', duration + 'ms');
+        $(target).css('height', target.offsetHeight + 'px');
         
-        $(target).removeProp('padding-top', 'padding-bottom', 'margin-top', 'margin-bottom');
-        
-        setTimeout(() => {
-            $(target).removeProp('height', 'overflow', 'transition-duration', 'transition-property');
-        }, duration);
+       $(target).css('padding-top', '');
+       $(target).css('padding-bottom', '');
+       $(target).css('margin-top', '');
+       $(target).css('margin-bottom', '');
 
-    }
+	   setTimeout( () => {
+           $(target).css('height', '');
+           $(target).css('overflow', '');
+           $(target).css('transition-duration', '');
+           $(target).css('transition-property', '');
+		}, duration);
+	}
 });
