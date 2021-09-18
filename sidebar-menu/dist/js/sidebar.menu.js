@@ -53,7 +53,7 @@ $(() => {
 
     }
 
-    let slideDown = (target, duration= 500) => {
+    function slideDown(target, duration= 500) {
         if ($(target).css('display') === 'none') {
             $(target).css('display', 'block');
         }
