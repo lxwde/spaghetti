@@ -10,7 +10,7 @@
 		<version>2.3.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.andistoev</groupId>
+	<groupId>com.tplatform</groupId>
 	<artifactId>opt-locking-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>testing-optimistic-locking-handling-spring-boot-jpa</name>
