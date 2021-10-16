@@ -1,4 +1,4 @@
-package com.andistoev.optlockingservice;
+package com.tplatform.optlockingservice;
 
 import org.springframework.data.repository.CrudRepository;
 

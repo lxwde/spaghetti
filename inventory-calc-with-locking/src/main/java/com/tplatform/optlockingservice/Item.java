@@ -1,4 +1,4 @@
-package com.andistoev.optlockingservice;
+package com.tplatform.optlockingservice;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

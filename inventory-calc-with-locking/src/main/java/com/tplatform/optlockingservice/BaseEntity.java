@@ -1,10 +1,9 @@
-package com.andistoev.optlockingservice;
+package com.tplatform.optlockingservice;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
 
 @Setter
 @Getter

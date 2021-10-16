@@ -1,4 +1,4 @@
-package com.andistoev.optlockingservice;
+package com.tplatform.optlockingservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
