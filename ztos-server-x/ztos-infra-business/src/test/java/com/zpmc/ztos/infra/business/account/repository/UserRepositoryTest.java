@@ -3,6 +3,7 @@ package com.zpmc.ztos.infra.business.account.repository;
 import com.zpmc.ztos.infra.base.event.ArgoCalendarEvent;
 import com.zpmc.ztos.infra.base.event.SimpleDiagnosticEvent;
 import com.zpmc.ztos.infra.base.event.ZpmcEventBus;
+import com.zpmc.ztos.infra.base.helper.ZpmcRunnable;
 import com.zpmc.ztos.infra.business.DummyApp;
 import com.zpmc.ztos.infra.business.account.User;
 import com.zpmc.ztos.infra.business.account.service.UserService;
@@ -29,6 +30,7 @@ import org.geolatte.geom.codec.Wkb.Dialect;
 
 import javax.persistence.criteria.*;
 import java.util.List;
+import java.util.concurrent.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {DummyApp.class})
@@ -133,5 +135,14 @@ public class UserRepositoryTest {
 //        });
 //
 //        System.out.println(users);
+    }
+
+    @Autowired
+    private ExecutorService executorService;
+
+    @Test
+    public void testExecutorService() throws ExecutionException, InterruptedException, TimeoutException {
+        Future<?> future = executorService.submit(new ZpmcUserRunnable("admin", "AAXXAA"));
+        future.get(10, TimeUnit.SECONDS);
     }
 }
