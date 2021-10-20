@@ -147,9 +147,9 @@ public class UserRepositoryTest {
     @Test
     public void testExecutorService() throws InterruptedException {
         // TODO: add priority to Runnable
-        Future<?> future1 = executorService.submit(new ZpmcUserRunnable("UUID", "user1", "USER001"));
-        Future<?> future2 = executorService.submit(new ZpmcUserRunnable("user2", "USER002"));
-        Future<?> future3 = executorService.submit(new ZpmcUserRunnable(priority1, "user3", "USER003"));
+        Future<?> future1 = executorService.submit(new ZpmcUserRunnable("user creation task1", "user1", "USER001"));
+        Future<?> future2 = executorService.submit(new ZpmcUserRunnable("user creation task2", "user2", "USER002"));
+        Future<?> future3 = executorService.submit(new ZpmcUserRunnable("user creation task3", "user3", "USER003"));
 
         while (!future1.isDone() && !future2.isDone() && !future3.isDone()) {
             Thread.sleep(300);

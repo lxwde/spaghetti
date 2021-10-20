@@ -4,11 +4,15 @@ public interface ZpmcRunnable extends Runnable {
 
     default void run() {
         beforeExecute();
-        execute();
+        try {
+            execute();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         afterExecute();
     }
 
     void beforeExecute();
-    void execute();
+    void execute() throws InterruptedException;
     void afterExecute();
 }
