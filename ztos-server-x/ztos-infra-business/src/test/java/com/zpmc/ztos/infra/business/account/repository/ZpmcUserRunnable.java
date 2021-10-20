@@ -9,7 +9,7 @@ public class ZpmcUserRunnable implements ZpmcRunnable {
     private static final Logger logger = LoggerFactory.getLogger(ZpmcUserRunnable.class);
 
     private String firstName, lastName;
-    public ZpmcUserRunnable(String firstName, String lastName) {
+    public ZpmcUserRunnable(String taskId, String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -32,4 +32,6 @@ public class ZpmcUserRunnable implements ZpmcRunnable {
     public void afterExecute() {
         logger.info("afterExecute, user found {} {}", user.getFirstName(), user.getLastName());
     }
+
+
 }

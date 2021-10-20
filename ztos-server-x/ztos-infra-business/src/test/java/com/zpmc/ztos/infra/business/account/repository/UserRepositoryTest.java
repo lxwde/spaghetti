@@ -2,6 +2,7 @@ package com.zpmc.ztos.infra.business.account.repository;
 
 import com.zpmc.ztos.infra.base.event.ArgoCalendarEvent;
 import com.zpmc.ztos.infra.base.event.SimpleDiagnosticEvent;
+import com.zpmc.ztos.infra.base.event.TaskStopEvent;
 import com.zpmc.ztos.infra.base.event.ZpmcEventBus;
 import com.zpmc.ztos.infra.base.helper.ZpmcRunnable;
 import com.zpmc.ztos.infra.business.DummyApp;
@@ -16,6 +17,8 @@ import org.hibernate.spatial.SpatialFunction;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.locationtech.jts.geom.Coordinate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -139,10 +142,21 @@ public class UserRepositoryTest {
 
     @Autowired
     private ExecutorService executorService;
+    private Logger logger = LoggerFactory.getLogger(UserRepositoryTest.class);
 
     @Test
-    public void testExecutorService() throws ExecutionException, InterruptedException, TimeoutException {
-        Future<?> future = executorService.submit(new ZpmcUserRunnable("admin", "AAXXAA"));
-        future.get(10, TimeUnit.SECONDS);
+    public void testExecutorService() throws InterruptedException {
+        // TODO: add priority to Runnable
+        Future<?> future1 = executorService.submit(new ZpmcUserRunnable("UUID", "user1", "USER001"));
+        Future<?> future2 = executorService.submit(new ZpmcUserRunnable("user2", "USER002"));
+        Future<?> future3 = executorService.submit(new ZpmcUserRunnable(priority1, "user3", "USER003"));
+
+        while (!future1.isDone() && !future2.isDone() && !future3.isDone()) {
+            Thread.sleep(300);
+            logger.info("Not finished, waiting...");
+            // TODO: add ThreadStopEvent
+            zpmcEventBus.postMQ(
+                    new TaskStopEvent("UUID"));
+        }
     }
 }
