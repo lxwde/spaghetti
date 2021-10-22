@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 
 public abstract class TaskEvent extends EventBase {
     private String taskId;
-
+    public TaskEvent() {}
     public TaskEvent(String taskId) {
         this.taskId = taskId;
     }

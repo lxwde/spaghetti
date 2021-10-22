@@ -1,9 +1,6 @@
 package com.zpmc.ztos.infra.business.account.repository;
 
-import com.zpmc.ztos.infra.base.event.ArgoCalendarEvent;
-import com.zpmc.ztos.infra.base.event.SimpleDiagnosticEvent;
-import com.zpmc.ztos.infra.base.event.TaskStopEvent;
-import com.zpmc.ztos.infra.base.event.ZpmcEventBus;
+import com.zpmc.ztos.infra.base.event.*;
 import com.zpmc.ztos.infra.base.helper.ZpmcRunnable;
 import com.zpmc.ztos.infra.business.DummyApp;
 import com.zpmc.ztos.infra.business.account.User;
@@ -147,16 +144,18 @@ public class UserRepositoryTest {
     @Test
     public void testExecutorService() throws InterruptedException {
         // TODO: add priority to Runnable
-        Future<?> future1 = executorService.submit(new ZpmcUserRunnable("user creation task1", "user1", "USER001"));
-        Future<?> future2 = executorService.submit(new ZpmcUserRunnable("user creation task2", "user2", "USER002"));
-        Future<?> future3 = executorService.submit(new ZpmcUserRunnable("user creation task3", "user3", "USER003"));
+        Future<?> future1 = executorService.submit(new ZpmcUserRunnable("userCreationTask1", "user1", "USER001"));
+        Future<?> future2 = executorService.submit(new ZpmcUserRunnable("userCreationTask2", "user2", "USER002"));
+        Future<?> future3 = executorService.submit(new ZpmcUserRunnable("userCreationTask3", "user3", "USER003"));
 
+        zpmcEventBus.postMQ(
+                new TaskTriggerEvent("userCreationTask1"));
+        zpmcEventBus.postMQ(
+                new TaskTriggerEvent("userCreationTask2"));
         while (!future1.isDone() && !future2.isDone() && !future3.isDone()) {
-            Thread.sleep(300);
+            Thread.sleep(3000);
             logger.info("Not finished, waiting...");
             // TODO: add ThreadStopEvent
-            zpmcEventBus.postMQ(
-                    new TaskStopEvent("UUID"));
         }
     }
 }

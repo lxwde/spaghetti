@@ -1,6 +1,7 @@
 package com.zpmc.ztos.infra.base.helper;
 
 import com.zpmc.ztos.infra.base.event.*;
+import org.jetbrains.kotlin.com.intellij.util.containers.ConcurrentHashSet;
 import org.jetbrains.kotlin.com.intellij.util.containers.ConcurrentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,8 +15,8 @@ import java.util.concurrent.ConcurrentSkipListSet;
 public class TaskEventDispatcher implements EventListener {
     @Autowired
     private ZpmcEventBus zpmcEventBus;
-
-    private ConcurrentSkipListSet<ZpmcAbstractRunnable> tasks = new ConcurrentSkipListSet<>();
+    // TODO: replace with concurrent list
+    private List<ZpmcAbstractRunnable> tasks = new ArrayList<>();
 
     public void addTask(ZpmcAbstractRunnable task) {
         tasks.add(task);
@@ -33,8 +34,8 @@ public class TaskEventDispatcher implements EventListener {
                 if (task.getTaskId().equals(taskEvent.getTaskId())) {
                     if (taskEvent instanceof TaskTriggerEvent) {
                         task.setTaskTriggerEvent((TaskTriggerEvent) taskEvent);
-                    } else if (taskEvent instanceof TaskCompleteEvent){
-                        task.setTaskCompleteEvent((TaskCompleteEvent)taskEvent);
+                    } else if (taskEvent instanceof TaskStopEvent){
+                        task.setTaskCompleteEvent((TaskStopEvent) taskEvent);
                     }
                 }
             }
