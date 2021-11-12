@@ -8,6 +8,7 @@ import org.springframework.aop.interceptor.SimpleAsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -32,7 +33,7 @@ public class AsyncConfiguration implements AsyncConfigurer, SchedulingConfigurer
 
     @Override
     @Bean(name = "taskExecutor")
-    public Executor getAsyncExecutor() {
+    public AsyncTaskExecutor getAsyncExecutor() {
         log.debug("Creating Async Task Executor");
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(3);
@@ -54,6 +55,6 @@ public class AsyncConfiguration implements AsyncConfigurer, SchedulingConfigurer
 
     @Bean
     public Executor scheduledTaskExecutor() {
-        return Executors.newScheduledThreadPool(2);
+        return Executors.newScheduledThreadPool(10);
     }
 }

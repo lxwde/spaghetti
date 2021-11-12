@@ -18,8 +18,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.hibernate.annotations.Type;
@@ -138,7 +140,8 @@ public class UserRepositoryTest {
     }
 
     @Autowired
-    private ExecutorService executorService;
+    @Qualifier("taskExecutor")
+    private AsyncTaskExecutor executorService;
     private Logger logger = LoggerFactory.getLogger(UserRepositoryTest.class);
 
     @Test
@@ -152,10 +155,20 @@ public class UserRepositoryTest {
                 new TaskTriggerEvent("userCreationTask1"));
         zpmcEventBus.postMQ(
                 new TaskTriggerEvent("userCreationTask2"));
-        while (!future1.isDone() && !future2.isDone() && !future3.isDone()) {
+        zpmcEventBus.postMQ(
+                new TaskTriggerEvent("userCreationTask3"));
+        while (!future1.isDone() &&
+                !future2.isDone() &&
+                !future3.isDone()) {
             Thread.sleep(3000);
             logger.info("Not finished, waiting...");
             // TODO: add ThreadStopEvent
+            zpmcEventBus.postMQ(
+                    new TaskStopEvent("userCreationTask3"));
+            zpmcEventBus.postMQ(
+                    new TaskStopEvent("userCreationTask3"));
+            zpmcEventBus.postMQ(
+                    new TaskStopEvent("userCreationTask3"));
         }
     }
 }
