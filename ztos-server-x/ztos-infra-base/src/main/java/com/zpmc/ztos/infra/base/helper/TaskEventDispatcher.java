@@ -33,9 +33,14 @@ public class TaskEventDispatcher implements EventListener {
             for (ZpmcAbstractRunnable task : tasks) {
                 if (task.getTaskId().equals(taskEvent.getTaskId())) {
                     if (taskEvent instanceof TaskTriggerEvent) {
-                        task.setTaskTriggerEvent((TaskTriggerEvent) taskEvent);
+                        if (task.getTaskId().equals(taskEvent.getTaskId())) {
+                            task.setTaskTriggerEvent((TaskTriggerEvent) taskEvent);
+                        }
+
                     } else if (taskEvent instanceof TaskStopEvent){
-                        task.setTaskCompleteEvent((TaskStopEvent) taskEvent);
+                        if (task.getTaskId().equals(taskEvent.getTaskId())) {
+                            task.setTaskCompleteEvent((TaskStopEvent) taskEvent);
+                        }
                     }
                 }
             }

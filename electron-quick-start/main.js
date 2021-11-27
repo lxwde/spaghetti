@@ -4,6 +4,7 @@ const contextMenu = require('electron-context-menu')
 const path = require('path')
 const isMac = process.platform === 'darwin'
 
+
 const template = [
   // { role: 'appMenu' }
   ...(isMac ? [{
@@ -100,11 +101,11 @@ const template = [
             buttons: ['OK'],
             defaultId: 2,
             title: '关于',
-            message: '飞凡企业管理软件柯桥家具公司定制版',
+            message: '云汇企业管理软件柯桥家具公司定制版',
             detail: ''
           };
         
-          dialog.showMessageBox(null, options, (response, checkboxChecked) => {
+          dialog.showMessageBox(BrowserWindow.getFocusedWindow(), options, (response, checkboxChecked) => {
             console.log(response);
             console.log(checkboxChecked);
           });
@@ -151,30 +152,55 @@ contextMenu({
 	]
 });
 
+
 function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    show: false,
-    icon:__dirname + '/favicon.ico',
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
-  });
-  mainWindow.maximize();
-  mainWindow.setTitle("System");
-  // mainWindow.setMenuBarVisibility(false)
-  mainWindow.show();
-  // and load the index.html of the app.
-  // mainWindow.loadURL('http://139.196.31.59:8069/');
+  let mainWindow = null
+  let loading = new BrowserWindow({show: false, frame: false, icon:__dirname + '/favicon.ico'})
+
+  loading.once('show', () => {
+    const mainWindow = new BrowserWindow({
+      show: false,
+      icon:__dirname + '/favicon.ico',
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js')
+      }
+    });
+
+    // mainWindow.setMenuBarVisibility(false)
+    mainWindow.webContents.once('dom-ready', () => {
+      console.log('main loaded')
+      mainWindow.show()
+      mainWindow.maximize();
+      mainWindow.setTitle("System");
+     loading.hide()
+     loading.close()
+    })
+    mainWindow.loadURL('http://139.196.31.59:8069/web');
+    // mainWindow.loadURL('http://localhost:8013/web');
+    mainWindow.webContents.on('did-fail-load', function (event, code, desc, url, isMainFrame) {
+      console.log('DID FAIL LOAD: ', code, desc, url);
+      
+      // mainWindow.loadURL('file://' + __dirname + '/index.html')
+      const { dialog } = require('electron')
+      const options = {
+        type: 'question',
+        buttons: ['OK'],
+        defaultId: 2,
+        title: '加载程序失败',
+        message: '检查网络设置后选择菜单-视图-刷新，或者重新启动程序',
+        detail: ''
+      };
+    
+      dialog.showMessageBox(mainWindow, options, (response, checkboxChecked) => {
+        console.log(response);
+        console.log(checkboxChecked);
+      });
+    });
+  })
+  loading.loadURL('file://' + __dirname + '/loading.html')
+  loading.show()
   
-  mainWindow.loadURL('http://localhost:8013/web');
-
-  mainWindow.webContents.on('did-fail-load', function (event, code, desc, url, isMainFrame) {
-    console.log('DID FAIL LOAD: ', code, desc, url);
-    // and then this will cause Electron to crash
-    mainWindow.loadURL('file://' + __dirname + '/index.html')
-  });
-
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }

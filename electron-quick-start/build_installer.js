@@ -6,7 +6,7 @@ const path = require('path');
 
 // 2. Define input and output directory.
 // Important: the directories must be absolute, not relative e.g
-const APP_DIR = path.resolve(__dirname, './FeiFanEnterprise-win32-x64');
+const APP_DIR = path.resolve(__dirname, './YunHuiEnterprise-win32-x64');
 // outputDirectory: "C:\\Users\sdkca\Desktop\windows_installer", 
 const OUT_DIR = path.resolve(__dirname, './windows_installer');
 
@@ -14,18 +14,19 @@ const OUT_DIR = path.resolve(__dirname, './windows_installer');
 const msiCreator = new MSICreator({
     appDirectory: APP_DIR,
     outputDirectory: OUT_DIR,
-
     // Configure metadata
-    description: 'FeiFan Enterprise',
-    exe: 'FeiFanEnterprise',
-    name: 'FeiFanEnterprise',
-    manufacturer: 'FeiFanEnterprise',
-    version: '1.0.0',
-
+    description: 'YunHui Enterprise',
+    exe: 'YunHuiEnterprise',
+    name: 'YunHuiEnterprise',
+    manufacturer: 'YunHuiEnterprise',
+    version: '1.0.1',
+    appIconPath: path.resolve(__dirname,'./favicon.ico'),
     // Configure installer User Interface
     ui: {
         chooseDirectory: true
     },
+    cultures: "zh-cn",
+    language: 2052
 });
 
 // 4. Create a .wxs template file

@@ -157,18 +157,19 @@ public class UserRepositoryTest {
                 new TaskTriggerEvent("userCreationTask2"));
         zpmcEventBus.postMQ(
                 new TaskTriggerEvent("userCreationTask3"));
-        while (!future1.isDone() &&
-                !future2.isDone() &&
-                !future3.isDone()) {
-            Thread.sleep(3000);
+        while (!future1.isDone()
+//                || !future2.isDone()
+//                || !future3.isDone()
+        ) {
             logger.info("Not finished, waiting...");
             // TODO: add ThreadStopEvent
             zpmcEventBus.postMQ(
-                    new TaskStopEvent("userCreationTask3"));
-            zpmcEventBus.postMQ(
-                    new TaskStopEvent("userCreationTask3"));
-            zpmcEventBus.postMQ(
-                    new TaskStopEvent("userCreationTask3"));
+                    new TaskStopEvent("userCreationTask1"));
+            Thread.sleep(3000);
+//            zpmcEventBus.postMQ(
+//                    new TaskStopEvent("userCreationTask2"));
+//            zpmcEventBus.postMQ(
+//                    new TaskStopEvent("userCreationTask3"));
         }
     }
 }
