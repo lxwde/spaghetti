@@ -5,7 +5,13 @@ import com.zpmc.ztos.infra.base.helper.ZpmcRunnable;
 import com.zpmc.ztos.infra.business.DummyApp;
 import com.zpmc.ztos.infra.business.account.User;
 import com.zpmc.ztos.infra.business.account.service.UserService;
+import com.zpmc.ztos.infra.business.base.AbstractBaseCalc;
+import com.zpmc.ztos.infra.business.base.UserValidationRule;
 import com.zpmc.ztos.infra.business.config.TestRedisConfiguration;
+import groovy.lang.GroovyObject;
+import groovy.util.GroovyScriptEngine;
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
 import org.assertj.core.api.Assertions;
 import org.geolatte.geom.*;
 import org.geolatte.geom.crs.CoordinateReferenceSystem;
@@ -31,6 +37,9 @@ import org.geolatte.geom.codec.WkbEncoder;
 import org.geolatte.geom.codec.Wkb.Dialect;
 
 import javax.persistence.criteria.*;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -171,5 +180,50 @@ public class UserRepositoryTest {
 //            zpmcEventBus.postMQ(
 //                    new TaskStopEvent("userCreationTask3"));
         }
+    }
+
+    @Test
+    public void testPlugin() throws MalformedURLException, ScriptException, ResourceException, InstantiationException, IllegalAccessException {
+
+        final GroovyScriptEngine engine = new GroovyScriptEngine(new URL[] {
+                new File("c:\\tmp\\").toURI().toURL()},
+                this.getClass().getClassLoader());
+
+        Class<GroovyObject> calcClass = engine.loadScriptByName("UserDefined.groovy");
+        GroovyObject calc = calcClass.newInstance();
+
+        int from = 1, to = 100;
+        Object result = calc.invokeMethod("calcSum", new Object[] {from, to});
+
+        logger.info("result: {}", result);
+
+        Object user = calc.invokeMethod("createMyUser", new Object[] {});
+
+        logger.info("user: {}", user);
+
+        List<User> userGroovy = User.findAllByFirstName("userGroovy");
+        logger.info("users found: {}", userGroovy);
+    }
+
+    @Test
+    public void testPluginEx() throws ScriptException, ResourceException, MalformedURLException, InstantiationException, IllegalAccessException {
+        final GroovyScriptEngine engine = new GroovyScriptEngine(new URL[] {
+                new File("c:\\tmp\\").toURI().toURL()},
+                this.getClass().getClassLoader());
+
+        Class<AbstractBaseCalc> calcClass = engine.loadScriptByName("UserDefinedCalc.groovy");
+        AbstractBaseCalc calc = calcClass.newInstance();
+        System.out.println(calc.getClass());
+//        System.out.println(calc.getMetaClass());
+        int from = 1, to = 100;
+        int res = calc.calc(from, to);
+        System.out.println(res);
+
+
+        Class<UserValidationRule> groovyClass = engine.loadScriptByName("UserDefinedValidationRule.groovy");
+        UserValidationRule rule = groovyClass.newInstance();
+        System.out.println(rule.getClass());
+        boolean validate = rule.validate(User.create("user1", "aaa"));
+        System.out.println(validate);
     }
 }

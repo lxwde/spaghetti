@@ -4,7 +4,6 @@ import com.zpmc.ztos.infra.base.config.ApplicationContextProvider;
 import com.zpmc.ztos.infra.base.event.TaskCompleteEvent;
 import com.zpmc.ztos.infra.base.event.TaskStopEvent;
 import com.zpmc.ztos.infra.base.event.TaskTriggerEvent;
-import com.zpmc.ztos.infra.base.event.ZpmcEventBus;
 import org.springframework.scheduling.annotation.Scheduled;
 
 public abstract class ZpmcAbstractRunnable implements ZpmcRunnable{
