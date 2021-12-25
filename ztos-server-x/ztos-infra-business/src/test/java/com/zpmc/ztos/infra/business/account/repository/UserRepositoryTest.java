@@ -1,47 +1,46 @@
 package com.zpmc.ztos.infra.business.account.repository;
 
 import com.zpmc.ztos.infra.base.event.*;
-import com.zpmc.ztos.infra.base.helper.ZpmcRunnable;
 import com.zpmc.ztos.infra.business.DummyApp;
 import com.zpmc.ztos.infra.business.account.User;
 import com.zpmc.ztos.infra.business.account.service.UserService;
 import com.zpmc.ztos.infra.business.base.AbstractBaseCalc;
+import com.zpmc.ztos.infra.business.base.HelloService;
 import com.zpmc.ztos.infra.business.base.UserValidationRule;
-import com.zpmc.ztos.infra.business.config.TestRedisConfiguration;
 import groovy.lang.GroovyObject;
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
 import org.assertj.core.api.Assertions;
-import org.geolatte.geom.*;
-import org.geolatte.geom.crs.CoordinateReferenceSystem;
+import org.geolatte.geom.C2D;
+import org.geolatte.geom.Geometries;
 import org.geolatte.geom.crs.CrsRegistry;
-import org.hibernate.spatial.SpatialFunction;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.locationtech.jts.geom.Coordinate;
+import org.python.core.PyObject;
+import org.python.util.PythonInterpreter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.task.AsyncTaskExecutor;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.hibernate.annotations.Type;
-import org.geolatte.geom.codec.Wkb;
-import org.geolatte.geom.codec.WkbDecoder;
-import org.geolatte.geom.codec.WkbEncoder;
-import org.geolatte.geom.codec.Wkb.Dialect;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.Predicate;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.Future;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {DummyApp.class})
@@ -225,5 +224,39 @@ public class UserRepositoryTest {
         System.out.println(rule.getClass());
         boolean validate = rule.validate(User.create("user1", "aaa"));
         System.out.println(validate);
+    }
+
+    @Test
+    public void testPluginWithJython() {
+
+//        PySystemState systemState = Py.getSystemState();
+//        systemState.path.append(new PyString("C:\\jython2.7.2\\Lib"));
+
+        PythonInterpreter interpreter = new PythonInterpreter();
+        interpreter.execfile("c:\\tmp\\HelloServicePython.py");
+        PyObject pyObject = interpreter.get("HelloServicePython").__call__();
+
+        HelloService helloService = (HelloService) pyObject.__tojava__(HelloService.class);
+        String hello = helloService.getHello();
+        System.out.println(hello);
+    }
+
+    @Test
+    public void testPluginWithJythonEx() throws IOException {
+        String line = "python " + " c:\\tmp\\calc.py 1 100";
+        CommandLine cmdLine = CommandLine.parse(line);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+        DefaultExecutor executor = new DefaultExecutor();
+        executor.setStreamHandler(streamHandler);
+
+        int exitCode = executor.execute(cmdLine);
+
+        System.out.println(outputStream.toString());
+        assertEquals("No errors should be detected", 0, exitCode);
+        assertEquals("Should contain script output: ", "5050", outputStream.toString()
+                .trim());
     }
 }

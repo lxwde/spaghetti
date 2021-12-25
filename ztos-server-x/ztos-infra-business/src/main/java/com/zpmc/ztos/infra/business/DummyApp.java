@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import redis.embedded.RedisServer;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
@@ -65,4 +64,14 @@ public class DummyApp {
                 env.getProperty("server.port"));
 
     }
+
+//    @Bean(name = "helloServiceFactory")
+//    public HelloServiceFactory helloFactory() {
+//        return new HelloServiceFactory();
+//    }
+//
+//    @Bean(name = "helloServicePython")
+//    public HelloService helloServicePython() throws Exception {
+//        return helloFactory().getObject();
+//    }
 }

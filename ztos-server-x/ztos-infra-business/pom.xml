@@ -215,6 +215,11 @@
             <artifactId>geolatte-geojson</artifactId>
             <version>1.6.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.python</groupId>
+            <artifactId>jython-standalone</artifactId>
+            <version>2.7.1</version>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.opengeo</groupId>-->
 <!--            <artifactId>geodb</artifactId>-->
