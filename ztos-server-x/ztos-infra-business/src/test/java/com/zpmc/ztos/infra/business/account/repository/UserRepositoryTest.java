@@ -239,6 +239,9 @@ public class UserRepositoryTest {
         HelloService helloService = (HelloService) pyObject.__tojava__(HelloService.class);
         String hello = helloService.getHello();
         System.out.println(hello);
+
+        List<User> userPython = User.findAllByFirstName("pythonUser");
+        logger.info("users found: {}", userPython);
     }
 
     @Test
@@ -254,7 +257,7 @@ public class UserRepositoryTest {
 
         int exitCode = executor.execute(cmdLine);
 
-        System.out.println(outputStream.toString());
+        System.out.println(outputStream);
         assertEquals("No errors should be detected", 0, exitCode);
         assertEquals("Should contain script output: ", "5050", outputStream.toString()
                 .trim());

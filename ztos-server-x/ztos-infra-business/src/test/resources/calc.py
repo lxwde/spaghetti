@@ -7,4 +7,4 @@ def calc(from_, to):
 if __name__ == "__main__":
     from_ = int(sys.argv[1])
     to = int(sys.argv[2])
-    print(calc(from_, to)
+    print(calc(from_, to))
