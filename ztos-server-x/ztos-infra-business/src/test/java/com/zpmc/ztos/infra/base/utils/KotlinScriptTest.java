@@ -22,6 +22,7 @@ public class KotlinScriptTest {
         ScriptEngine scriptEngine = scriptEngineManager.getEngineByExtension("kts");
 
        Object kts = scriptEngine.eval(new FileReader("c:\\tmp\\UserDefined.kts"));
+
        System.out.println(kts);
     }
 
