@@ -15,7 +15,7 @@
     "blueprints": [],
     "otherModules": [],
     "pages": [],
-    "creationTimestamp": 1641548310577,
+    "creationTimestamp": 1641516458191,
     "serviceDiscoveryType": false,
     "reactive": false,
     "authenticationType": "jwt",
@@ -39,7 +39,7 @@
     "enableTranslation": true,
     "nativeLanguage": "en",
     "packageFolder": "com/mycompany/myapp",
-    "jwtSecretKey": "MDhkOTA3MzhhYmFiYmY0OGE5NzY2MjkxNjc5NDJlZmMwZWZmMzlkMjQxZGMzNDUyMmEyZjRjZDljNTY5YTFmMTliMDM4YzBiZTBmMzY3OGY1MjM1N2IyMzIwM2I1MjI2MzQxZWZlNDMxOTlmNTRlMzZmYjU1MzEwNjJkN2Y5ZDM=",
+    "jwtSecretKey": "OGQ2YWQzYTAzMzUyYTU1MjQzMzA1ZTE3NzgxZjRiMDllNWUwNGQxNmY4MTUzYmNlZTBkNzI0ZDlmZjAwYjhmYmZmNDcxMzAxZTY0Y2FlMDViYWI1M2I3YzkxYzZmZmJkYTkxZDhjYzBiMjk0N2NiYTM0ZGRlNDg1NTkyZmRkNDQ=",
     "devServerPort": 9060,
     "clientPackageManager": "npm",
     "languages": ["en", "zh-cn"]
