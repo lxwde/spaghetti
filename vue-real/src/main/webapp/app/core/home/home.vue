@@ -4,7 +4,7 @@
       <span class="hipster img-fluid rounded"></span>
     </div>
     <div class="col-md-9">
-      <h1 class="display-4" v-text="$t('home.title')">Welcome, Java Hipster!</h1>
+      <h1 class="display-4" v-text="$t('home.title')">Welcome, HaHaHa!</h1>
       <p class="lead" v-text="$t('home.subtitle')">This is your homepage</p>
 
       <div>
@@ -28,12 +28,12 @@
         </div>
       </div>
 
-      <p v-text="$t('home.question')">If you have any question on JHipster:</p>
+      <p v-text="$t('home.question')">If you have any question on Hello:</p>
 
       <ul>
         <li>
           <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer" v-text="$t('home.link.homepage')"
-            >JHipster homepage</a
+            >Hello homepage</a
           >
         </li>
         <li>
@@ -42,7 +42,7 @@
             target="_blank"
             rel="noopener noreferrer"
             v-text="$t('home.link.stackoverflow')"
-            >JHipster on Stack Overflow</a
+            >Hello on Stack Overflow</a
           >
         </li>
         <li>
@@ -51,12 +51,12 @@
             target="_blank"
             rel="noopener noreferrer"
             v-text="$t('home.link.bugtracker')"
-            >JHipster bug tracker</a
+            >Hello bug tracker</a
           >
         </li>
         <li>
           <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" v-text="$t('home.link.chat')"
-            >JHipster public chat room</a
+            >Hello public chat room</a
           >
         </li>
         <li>
@@ -67,7 +67,7 @@
       </ul>
 
       <p>
-        <span v-text="$t('home.like')">If you like JHipster, don't forget to give us a star on</span>
+        <span v-text="$t('home.like')">If you like Hello, don't forget to give us a star on</span>
         <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" v-text="$t('home.github')"
           >GitHub</a
         >!
