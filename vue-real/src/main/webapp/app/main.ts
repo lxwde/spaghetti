@@ -28,6 +28,10 @@ import TrackerService from './admin/tracker/tracker.service';
 import UserOAuth2Service from '@/entities/user/user.oauth2.service';
 /* tslint:disable */
 
+import DepartmentService from '@/entities/department/department.service';
+import EmployeeService from '@/entities/employee/employee.service';
+import JobService from '@/entities/job/job.service';
+import JobHistoryService from '@/entities/job-history/job-history.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -88,6 +92,10 @@ new Vue({
 
     userOAuth2Service: () => new UserOAuth2Service(),
     translationService: () => translationService,
+    departmentService: () => new DepartmentService(),
+    employeeService: () => new EmployeeService(),
+    jobService: () => new JobService(),
+    jobHistoryService: () => new JobHistoryService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService,
   },
