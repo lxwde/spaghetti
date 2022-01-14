@@ -1,4 +1,4 @@
-package com.app.harry.rabbitmq_android;
+package com.app.zpmc.rabbitmq;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;

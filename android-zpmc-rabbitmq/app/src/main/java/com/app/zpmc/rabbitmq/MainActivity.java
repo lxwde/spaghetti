@@ -1,4 +1,4 @@
-package com.app.harry.rabbitmq_android;
+package com.app.zpmc.rabbitmq;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText contentEt;
     private StringBuilder sb = new StringBuilder();
 
-    private final String sendQueueOne = "testOne";
+    private final String sendQueueOne = "zpmc";
     private final String sendRoutingKey = "two.rabbit.ok";
-    private final String receiveQueueOne = "testOne";
+    private final String receiveQueueOne = "zpmc";
     private final String receiveQueueTwo = "testTwo";
     private final String receiveRoutingKey = "iacp.biz.job.alert.handler.#";
 
