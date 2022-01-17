@@ -2,20 +2,13 @@ package com.zpmc.ztos.infra.business.account;
 
 import com.google.common.base.Objects;
 import com.zpmc.ztos.infra.business.base.AbstractEntity;
+import org.geolatte.geom.Geometry;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
-import org.geolatte.geom.Geometry;
-import org.geolatte.geom.Polygon;
-import org.geolatte.geom.Point;
-import org.geolatte.geom.PositionSequence;
-import org.geolatte.geom.PositionSequenceBuilders;
-import org.geolatte.geom.codec.Wkb;
-import org.geolatte.geom.codec.WkbDecoder;
-import org.geolatte.geom.codec.WkbEncoder;
-import org.geolatte.geom.codec.Wkb.Dialect;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass

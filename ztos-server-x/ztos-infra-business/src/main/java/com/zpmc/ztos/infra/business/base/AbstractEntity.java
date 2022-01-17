@@ -1,24 +1,22 @@
 package com.zpmc.ztos.infra.business.base;
 
-import org.hibernate.envers.Audited;
+import com.zpmc.ztos.infra.business.config.ZpmcEntityListener;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 
 
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners({AuditingEntityListener.class, ZpmcEntityListener.class})
 public abstract class AbstractEntity implements Serializable, Persistable<Integer> {
     private static final long serialVersionUID = 1L;
 
