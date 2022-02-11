@@ -20,6 +20,8 @@ import java.time.LocalDateTime;
 public abstract class AbstractEntity implements Serializable, Persistable<Integer> {
     private static final long serialVersionUID = 1L;
 
+    public String getMsgId() {return null;}
+
     public boolean isNew() {
         return getId() == null;
     }

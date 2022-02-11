@@ -1,5 +1,6 @@
 package com.zpmc.ztos.infra.business.config;
 
+import com.zpmc.ztos.infra.business.account.User;
 import com.zpmc.ztos.infra.business.base.AbstractEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,8 @@ public class ZpmcEntityListener {
     @PostPersist
     private void afterSave(AbstractEntity entity) {
         logger.info("after save: ", entity);
+
+        // send message to notify, receiver should read latest data from table
     }
 
     @PostUpdate
