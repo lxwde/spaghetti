@@ -1,5 +1,24 @@
 # vuereal
 
+Start JHipster backend: mvnw -P-webpack -Dmaven.test.skip=true
+Start JHipster frontend Angular: npm start
+Set necessary break point in your Angular project
+Start #1 debugger profile (F5 or play button)
+launch.json
+
+{
+"version": "0.2.0",
+"configurations": [
+{
+"type": "chrome",
+"request": "launch",
+"name": "Launch Chrome against localhost",
+"url": "http://localhost:9000",
+"webRoot": "${workspaceFolder}"
+}
+]
+}
+
 This application was generated using JHipster 7.1.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.1.0](https://www.jhipster.tech/documentation-archive/v7.1.0).
 
 ## Development
