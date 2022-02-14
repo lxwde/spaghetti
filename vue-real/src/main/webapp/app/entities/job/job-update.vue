@@ -59,7 +59,7 @@
                 v-for="employeeOption in employees"
                 :key="employeeOption.id"
               >
-                {{ employeeOption.id }}
+                {{ employeeOption.firstName + ' ' + employeeOption.lastName }}
               </option>
             </select>
           </div>

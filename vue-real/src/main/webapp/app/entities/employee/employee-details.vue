@@ -54,7 +54,7 @@
           <dd>
             <div v-if="employee.manager">
               <router-link :to="{ name: 'EmployeeView', params: { employeeId: employee.manager.id } }">{{
-                employee.manager.id
+                employee.manager.firstName + ' ' + employee.manager.lastName
               }}</router-link>
             </div>
           </dd>
@@ -64,7 +64,7 @@
           <dd>
             <div v-if="employee.department">
               <router-link :to="{ name: 'DepartmentView', params: { departmentId: employee.department.id } }">{{
-                employee.department.id
+                employee.department.departmentName
               }}</router-link>
             </div>
           </dd>

@@ -56,7 +56,9 @@
             <td>{{ job.maxSalary }}</td>
             <td>
               <div v-if="job.employee">
-                <router-link :to="{ name: 'EmployeeView', params: { employeeId: job.employee.id } }">{{ job.employee.id }}</router-link>
+                <router-link :to="{ name: 'EmployeeView', params: { employeeId: job.employee.id } }">
+                  {{ job.employee.firstName + ' ' + job.employee.lastName }}
+                </router-link>
               </div>
             </td>
             <td class="text-right">

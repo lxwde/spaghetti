@@ -5,7 +5,8 @@ import EmployeeService from './employee.service';
 
 @Component
 export default class EmployeeDetails extends Vue {
-  @Inject('employeeService') private employeeService: () => EmployeeService;
+  @Inject('employeeService')
+  private employeeService: () => EmployeeService;
   public employee: IEmployee = {};
 
   beforeRouteEnter(to, from, next) {

@@ -70,14 +70,14 @@
             <td>
               <div v-if="jobHistory.department">
                 <router-link :to="{ name: 'DepartmentView', params: { departmentId: jobHistory.department.id } }">{{
-                  jobHistory.department.id
+                  jobHistory.department.departmentName
                 }}</router-link>
               </div>
             </td>
             <td>
               <div v-if="jobHistory.employee">
                 <router-link :to="{ name: 'EmployeeView', params: { employeeId: jobHistory.employee.id } }">{{
-                  jobHistory.employee.id
+                  jobHistory.employee.firstName + ' ' + jobHistory.employee.lastName
                 }}</router-link>
               </div>
             </td>
