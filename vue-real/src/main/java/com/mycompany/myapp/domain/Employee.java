@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import liquibase.pro.packaged.E;
 
 /**
  * The Employee entity.
@@ -64,6 +65,11 @@ public class Employee implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "employees" }, allowSetters = true)
     private Department department;
+
+    @ApiModelProperty(value = "Addresses of employee")
+    @OneToMany
+    @JsonIgnoreProperties(value = { "employee" }, allowSetters = true)
+    private Set<Address> addresses = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -225,6 +231,19 @@ public class Employee implements Serializable {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public Employee addresses(Set<Address> addresses) {
+        this.addresses = addresses;
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

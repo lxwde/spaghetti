@@ -151,7 +151,9 @@ public class EmployeeResource {
                     if (employee.getCommissionPct() != null) {
                         existingEmployee.setCommissionPct(employee.getCommissionPct());
                     }
-
+                    if (employee.getAddresses() != null) {
+                        existingEmployee.setAddresses(employee.getAddresses());
+                    }
                     return existingEmployee;
                 }
             )
