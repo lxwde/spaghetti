@@ -277,6 +277,7 @@ public class Employee implements Serializable {
             ", hireDate='" + getHireDate() + "'" +
             ", salary=" + getSalary() +
             ", commissionPct=" + getCommissionPct() +
+            ", addresses=" + getAddresses() +
             "}";
     }
 }
