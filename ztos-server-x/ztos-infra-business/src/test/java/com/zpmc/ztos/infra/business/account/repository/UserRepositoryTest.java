@@ -103,6 +103,7 @@ public class UserRepositoryTest {
 
     @Test
     public void testEventPostMQ() throws InterruptedException {
+        // __TypeId__ : com.zpmc.ztos.infra.base.event.SimpleDiagnosticEvent
         zpmcEventBus.postMQ(
                 new SimpleDiagnosticEvent("AGV delay", "solution2"));
 

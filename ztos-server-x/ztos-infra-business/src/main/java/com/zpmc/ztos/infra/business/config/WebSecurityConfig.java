@@ -15,6 +15,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.time.Duration;
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -48,14 +55,41 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf().disable()
+		httpSecurity.cors().and().csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
 				.authorizeRequests()
 				.antMatchers("/generate").permitAll()
 				.antMatchers("/admin/**").hasAuthority(Constants.ADMIN)
-				.antMatchers("/**/**").denyAll();
+				.antMatchers("/**/**").permitAll();
 
 		httpSecurity.addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
+	}
+
+	@Bean
+	public CorsFilter corsFilter() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration corsConfiguration = new CorsConfiguration();
+		corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
+		corsConfiguration.setAllowedMethods(Arrays.asList("*"));
+		corsConfiguration.setMaxAge(Duration.ofMinutes(10));
+		source.registerCorsConfiguration("/**", corsConfiguration);
+		return new CorsFilter(source);
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(Arrays.asList("*"));
+		configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH"));
+		configuration.setAllowCredentials(true);
+		//the below three lines will add the relevant CORS response headers
+		configuration.addAllowedOrigin("*");
+		configuration.addAllowedHeader("*");
+		configuration.addAllowedHeader("http://localhost:8081");
+		configuration.addAllowedMethod("*");
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
 	}
 }

@@ -8,6 +8,7 @@ import com.zpmc.ztos.infra.business.base.BaseBO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -56,14 +57,16 @@ public class UserService  implements EventListener {
 ////        logger.info("Event received: {}", event);
 ////    }
 //
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
+
     @Override
     //@Subscribe
     public void handleEvent(EventBase event) {
         logger.info("Event received: {}", event);
-//        if (event instanceof ArgoCalendarEvent) {
-//
-//        } else if (event instanceof XXXEvent) {
-//
-//        }
+
+        if (event instanceof SimpleDiagnosticEvent) {
+            simpMessagingTemplate.convertAndSend("/topic/notifications", event);
+        }
     }
 }
