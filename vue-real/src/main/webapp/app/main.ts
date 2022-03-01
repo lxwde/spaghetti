@@ -1,3 +1,4 @@
+import { Address } from './shared/model/address.model';
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.common with an alias.
 import Vue from 'vue';
@@ -32,6 +33,7 @@ import DepartmentService from '@/entities/department/department.service';
 import EmployeeService from '@/entities/employee/employee.service';
 import JobService from '@/entities/job/job.service';
 import JobHistoryService from '@/entities/job-history/job-history.service';
+import AddressService from '@/entities/address/address.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -96,6 +98,7 @@ new Vue({
     employeeService: () => new EmployeeService(),
     jobService: () => new JobService(),
     jobHistoryService: () => new JobHistoryService(),
+    addressService: () => new AddressService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService,
   },

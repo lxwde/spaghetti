@@ -46,6 +46,10 @@
             <span v-text="$t('global.menu.entities.jobHistory')">Job History</span>
           </b-dropdown-item>
           <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+          <b-dropdown-item to="/address">
+            <font-awesome-icon icon="asterisk" />
+            <span v-text="$t('global.menu.entities.Address')">Address</span>
+          </b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown
           right

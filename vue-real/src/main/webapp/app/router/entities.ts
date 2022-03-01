@@ -26,6 +26,10 @@ const JobHistory = () => import('@/entities/job-history/job-history.vue');
 const JobHistoryUpdate = () => import('@/entities/job-history/job-history-update.vue');
 // prettier-ignore
 const JobHistoryDetails = () => import('@/entities/job-history/job-history-details.vue');
+// prettier-ignore
+const Address = () => import('@/entities/address/address.vue');
+// prettier-ignore
+const AddressUpdate = () => import('@/entities/address/address-update.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 export default [
@@ -125,5 +129,26 @@ export default [
     component: JobHistoryDetails,
     meta: { authorities: [Authority.USER] },
   },
+  {
+    path: '/address',
+    name: 'Address',
+    component: Address,
+    meta: {
+      authorities: [Authority.USER],
+    },
+  },
+  {
+    path: '/address/new',
+    name: 'AddressCreate',
+    component: AddressUpdate,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/address/:addressId/edit',
+    name: 'AddressEdit',
+    component: AddressUpdate,
+    meta: { authorities: [Authority.USER] },
+  },
+
   // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
 ];

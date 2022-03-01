@@ -26,7 +26,7 @@ const bModalStub = {
   },
 };
 
-describe('Component Tests', () => {
+describe.only('Component Tests', () => {
   describe('Department Management Component', () => {
     let wrapper: Wrapper<DepartmentClass>;
     let comp: DepartmentClass;
