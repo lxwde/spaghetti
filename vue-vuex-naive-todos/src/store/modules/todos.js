@@ -31,13 +31,13 @@ const actions = {
         commit("newTodo", response.data)
     },
     async deleteTodo({ commit }, id) {
-        await axios.delete("https://jsonplaceholder.typicode.com/todos/${id}");
-        commit("reoveTodo", id);
+        await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
+        commit("removeTodo", id);
     },
     async filterTodos({ commit }, e) {
         const options = e.target.options;
         const limit = parseInt(options[options.selectedIndex].innerText);
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/todos?_limit=${limit}`);
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/todos?limit=${limit}`);
         commit("setTodos", response.data);
     },
     async updateTodo({ commit }, todo) {
