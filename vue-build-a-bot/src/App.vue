@@ -60,6 +60,9 @@ export default {
     // RobotBuilder,
     // Search,
   },
+  mounted() {
+    document.title = 'build-a-bot';
+  },
   data() {
     return {
       // use objects or reactive api instead of primitive type

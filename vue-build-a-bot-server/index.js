@@ -1,10 +1,11 @@
 const path = require('path')
 const express = require("express");
-const history = require('connect-history-api');
+// connect-history-api or connect-history-api-fallback
+// const history = require('connect-history-api-fallback');
 
 const app = express();
 
-app.use(history({index: 'index.html'}));
+// app.use(history({ index: 'index.html' }));
 
 app.get('/api/parts', (req, res) =>
   res.send({
@@ -170,7 +171,7 @@ app.get('/api/parts', (req, res) =>
   })
 );
 
-app.post('/api/cart', (req, res) => 
+app.post('/api/cart', (req, res) =>
   setTimeout(() => res.status(201).send(), 800)
 );
 
@@ -178,7 +179,7 @@ app.post('/api/sign-in', (req, res) => res.status(200).send());
 
 app.use('/api/images', express.static('images'));
 
-app.use('/', express.static('dist', {index.html}));
+// app.use('/', express.static('dist', 'index.html'));
 
 
 app.listen(8081, () => console.log('Server listening on port 8081!'));
