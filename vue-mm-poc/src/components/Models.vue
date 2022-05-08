@@ -7,10 +7,8 @@
           :key="model.id"
           class="model"
           >
-            <router-link 
-            :to="{name: 'ModelDetails', params: {id: model.id}}"
-            >
-                {{ model.name }}
+            <router-link :to="{name: 'ModelDetails', params: {id: model.id}}">
+            {{ model.name }}
             </router-link>
           </div>
       </div>
