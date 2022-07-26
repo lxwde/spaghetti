@@ -17,11 +17,11 @@ const mutations = {
 
 const actions = {
     async fetchModels({ commit }) {
-        const response = await axios.get("http://localhost:8081/api/models");
+        const response = await axios.get("http://localhost:8080/api/models");
         commit("setModels", response.data);
     },
     async fetchModel({ commit }, id) {
-        const response = await axios.get(`http://localhost:8081/api/models/${id}`);
+        const response = await axios.get(`http://localhost:8080/api/models/${id}`);
         commit("setCurrentModel", response.data);
     }
 };

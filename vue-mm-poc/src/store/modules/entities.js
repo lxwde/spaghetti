@@ -35,19 +35,19 @@ const mutations = {
 
 const actions = {
   async fetchTps({ commit }, modelId) {
-    axios.get(`http://localhost:8081/api/processTypes?modelId=${modelId}`)
+    axios.get(`http://localhost:8080/api/processTypes?modelId=${modelId}`)
       .then((resp) => commit("setTps", resp.data));
   },
   async fetchFieldTypes({ commit }, modelId) {
-    const resp = await axios.get(`http://localhost:8081/api/itemTypes?modelId=${modelId}`);
+    const resp = await axios.get(`http://localhost:8080/api/itemTypes?modelId=${modelId}`);
     commit("setFieldTypes", resp.data);
   },
   async fetchEventTypes({ commit }, modelId) {
-    const resp = await axios.get(`http://localhost:8081/api/eventTypes?modelId=${modelId}`);
+    const resp = await axios.get(`http://localhost:8080/api/eventTypes?modelId=${modelId}`);
     commit("setEventTypes", resp.data);
   },
   async fetchCodeLists({ commit }, modelId) {
-    const resp = await axios.get(`http://localhost:8081/api/codeLists?modelId=${modelId}`);
+    const resp = await axios.get(`http://localhost:8080/api/codeLists?modelId=${modelId}`);
     commit("setCodeLists", resp.data);
   },
 };

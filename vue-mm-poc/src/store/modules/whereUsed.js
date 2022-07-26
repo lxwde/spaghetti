@@ -29,7 +29,7 @@ const convertWhereUsed = (from, to) => {
 
 const actions = {
   async fetchWhereUsed({ commit }, fieldId) {
-    axios.get(`http://localhost:8081/api/whereUsed?fieldId=${fieldId}`)
+    axios.get(`http://localhost:8080/api/whereUsed?fieldId=${fieldId}`)
       .then((resp) => {
         commit("setWhereUsed", resp.data[0]);
       });

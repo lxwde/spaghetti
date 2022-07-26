@@ -23,7 +23,7 @@ const mutations = {
 
 const actions = {
   async fetchTpFields({ commit }, entityId) {
-    const resp = await axios.get(`http://localhost:8081/api/processTypeFields?entityId=${entityId}`);
+    const resp = await axios.get(`http://localhost:8080/api/processTypeFields?entityId=${entityId}`);
     commit("setTpFields", resp.data);
   },
   async fetchFieldTypeFields({ commit }, entityId) {

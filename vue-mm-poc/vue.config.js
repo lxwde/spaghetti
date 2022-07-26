@@ -1,5 +1,5 @@
 module.exports = {
     devServer: {
-        proxy: 'http://localhost:8080'
+        proxy: 'https://gtt-mm-poc-int.cfapps.sap.hana.ondemand.com/'
     }
 }
